@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keaper.vote.persistence.dao.UserDao">
+    <resultMap id="userMap" type="User">
+        <id property="id" column="id"/>
+        <result property="nickName"  column="nick_name"/>
+        <result property="email"  column="email"/>
+        <result property="phone"  column="phone"/>
+        <result property="password"  column="password"/>
+        <result property="registerTime"  column="register_time"/>
+        <result property="activateStatus" column="activate_status"/>
+        <result property="activateCode" column="activate_code"/>
+    </resultMap>
+
+    <sql id="allColumns">
+        user.id,
+        user.nick_name,
+        user.email,
+        user.phone,
+        user.password,
+        user.register_time,
+        user.activate_status,
+        user.activate_code
+    </sql>
+
+
+    <select id="selectUserInfoById" resultMap="userMap">
+        SELECT
+            <include refid="allColumns"/>
+        FROM
+            user
+        WHERE
+            id = #{id}
+    </select>
+
+    <insert id="insertUser">
+        INSERT INTO user (
+          nick_name,
+          <if test="email != null">
+                email,
+          </if>
+          <if test="phone != null">
+              phone,
+          </if>
+          password,
+          register_time,
+          activate_status,
+          activate_code)
+        VALUES(
+          #{nickName},
+          <if test="email != null">
+              #{email},
+          </if>
+          <if test="phone != null">
+              #{phone},
+          </if>
+          #{password},
+          now(),
+          <choose>
+              <when test="activateStatus != null">
+                  #{activateStatus},
+              </when>
+              <otherwise>
+                  0,
+              </otherwise>
+          </choose>
+          #{activateCode})
+    </insert>
+
+</mapper>

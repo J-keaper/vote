@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="log.dir" value="${catalina.base}/logs"/>
+    <property name="encoding" value="UTF-8"/>
+    <property name="normal-pattern"
+              value="%d{yyyy-MM-dd:HH:mm:ss:SSS} %-5level %logger-%M:%L %m%n"/>
+
+    <appender name="fileDefaultAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/vote.log</file>
+        <Append>true</Append>
+        <encoder>
+            <pattern>${normal-pattern}</pattern>
+            <charset>${encoding}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>vote.%d{yyyy-MM-dd}.log</FileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${normal-pattern}</pattern>
+            <charset>${encoding}</charset>
+        </encoder>
+    </appender>
+
+
+    <root level="INFO">
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="fileDefaultAppender"/>
+    </root>
+
+
+</configuration>
