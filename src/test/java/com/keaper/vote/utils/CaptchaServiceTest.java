@@ -20,4 +20,9 @@ public class CaptchaServiceTest extends BaseSpringTest{
         Pair<String,BufferedImage> captchaPair = captchaService.generateAlphanumericCaptcha();
         System.out.println(captchaPair);
     }
+
+    @Test
+    public void getSessionKeyByRef(){
+        System.out.println(CaptchaService.getSessionKeyByRef("login"));
+    }
 }

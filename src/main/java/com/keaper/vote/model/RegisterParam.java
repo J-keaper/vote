@@ -18,6 +18,11 @@ public class RegisterParam {
      * 密码
      */
     private String password;
+    /**
+     * 验证码
+     */
+    private String vcode;
+
 
     public String getNickName() {
         return nickName;
@@ -49,6 +54,14 @@ public class RegisterParam {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getVcode() {
+        return vcode;
+    }
+
+    public void setVcode(String vcode) {
+        this.vcode = vcode;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.keaper.vote.service;
 
-import com.keaper.vote.common.constants.ActivateStatus;
+import com.keaper.vote.common.enums.ActivateStatus;
 import com.keaper.vote.model.LoginParam;
 import com.keaper.vote.model.RegisterParam;
 import com.keaper.vote.persistence.dao.UserDao;
@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,10 +20,22 @@ public class UserService {
     @Resource
     private UserDao userDao;
 
+
+    public boolean judgeEmailExist(String email){
+       return userDao.selectIdExistByEmail(email);
+    }
+
+    public boolean judgePhoneExist(String phone){
+        return userDao.selectIdExistByPhone(phone);
+    }
+
+    public boolean judgeNickExist(String nickName){
+        return userDao.selectIDExistByNick(nickName);
+    }
+
     public boolean register(RegisterParam registerParam) {
         logger.info("注册参数：{}",registerParam);
         User user = generateUser(registerParam);
-        logger.info("user :{}",user);
         int affectRows = userDao.insertUser(user);
         return affectRows >= 1;
     }
@@ -35,6 +46,11 @@ public class UserService {
         return userDao.selectUserByEmailAndPassword(loginParam.getEmail(),loginParam.getPassword());
     }
 
+    /**
+     * 构造User对象
+     * @param registerParam
+     * @return
+     */
     private User generateUser(RegisterParam registerParam) {
         User user = new User();
         user.setNickName(registerParam.getNickName());

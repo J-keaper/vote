@@ -1,6 +1,6 @@
 package com.keaper.vote.persistence.po;
 
-import com.keaper.vote.common.constants.ActivateStatus;
+import com.keaper.vote.common.enums.ActivateStatus;
 
 import java.util.Date;
 

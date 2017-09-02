@@ -1,6 +1,6 @@
 package com.keaper.vote.persistence.handler;
 
-import com.keaper.vote.common.constants.ActivateStatus;
+import com.keaper.vote.common.enums.ActivateStatus;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 

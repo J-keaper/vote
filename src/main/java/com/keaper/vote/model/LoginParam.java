@@ -6,6 +6,10 @@ public class LoginParam {
      */
     String email;
     /**
+     * 手机
+     */
+    String phone;
+    /**
      * 密码
      */
     String password;
@@ -36,6 +40,14 @@ public class LoginParam {
 
     public void setVcode(String vcode) {
         this.vcode = vcode;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override

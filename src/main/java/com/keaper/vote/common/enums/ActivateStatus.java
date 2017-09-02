@@ -1,6 +1,4 @@
-package com.keaper.vote.common.constants;
-
-import org.omg.CORBA.UNKNOWN;
+package com.keaper.vote.common.enums;
 
 public enum ActivateStatus {
     INACTIVE(0,"未激活"),

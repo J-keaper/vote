@@ -1,7 +1,7 @@
 package com.keaper.vote.persistence.dao;
 
 import com.keaper.vote.BaseSpringTest;
-import com.keaper.vote.common.constants.ActivateStatus;
+import com.keaper.vote.common.enums.ActivateStatus;
 import com.keaper.vote.persistence.po.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,5 +31,17 @@ public class UserDaoTest extends BaseSpringTest{
         user.setActivateCode(UUID.randomUUID().toString().replace("-",""));
         user.setActivateStatus(ActivateStatus.INACTIVE);
         Assert.assertEquals(userDao.insertUser(user),1);
+    }
+
+    @Test
+    public void selectUserByEmailAndPassword(){
+        User user = userDao.selectUserByEmailAndPassword("1273570695@qq.com","1407084125");
+        System.out.println(user);
+    }
+
+    @Test
+    public void selectIdByEmail(){
+        boolean isExists = userDao.selectIdExistByEmail("1273570695@qq.com");
+        System.out.println(isExists);
     }
 }

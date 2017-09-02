@@ -83,8 +83,14 @@ public class JsonResult<T> implements Serializable {
         SUCCESS(0,"成功"),
 
         LOGIN_FAIL(101,"登陆失败"),
+        LOGIN_EMAIL_NOT_EXIST(102,"邮箱不存在"),
+        LOGIN_PASSWORD_WRONG(103,"密码错误"),
+        LOGIN_VCODE_ERROR(104,"验证码错误"),
 
-        REGISTER_FAIL(201,"注册失败");
+        REGISTER_FAIL(201,"注册失败"),
+        REGISTER_EMAIL_EXIST(202,"邮箱已注册"),
+        REGISTER_NICK_NAME_EXIST(203,"昵称已存在"),
+        REGISTER_VCODE_ERROR(204,"验证码错误");
 
         int  code;
         String text;

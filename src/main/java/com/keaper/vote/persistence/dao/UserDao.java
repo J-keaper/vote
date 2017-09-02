@@ -2,6 +2,7 @@ package com.keaper.vote.persistence.dao;
 
 
 import com.keaper.vote.persistence.po.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,29 @@ public interface UserDao {
      * @param id
      * @return
      */
-    User selectUserInfoById(Integer id);
+    User selectUserInfoById(@Param("id") int id);
+
+    /**
+     * 根据email查用户
+     * @param email
+     * @return
+     */
+    boolean selectIdExistByEmail(@Param("email") String email);
+
+    /**
+     * 根据phone查用户
+     * @param phone
+     * @return
+     */
+    boolean selectIdExistByPhone(@Param("phone") String phone);
+
+    /**
+     * 根据昵称查用户
+     * @param nickName
+     * @return
+     */
+    boolean selectIDExistByNick(@Param("nickName") String nickName);
+
 
     /**
      * 插入新用戶
@@ -29,5 +52,6 @@ public interface UserDao {
      * @param password
      * @return
      */
-    User selectUserByEmailAndPassword(String email, String password);
+    User selectUserByEmailAndPassword(@Param("email") String email,
+                                      @Param("password") String password);
 }

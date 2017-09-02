@@ -8,6 +8,6 @@
     
     <typeHandlers>
         <typeHandler handler="com.keaper.vote.persistence.handler.ActivateStatusHandler"
-                     javaType="com.keaper.vote.common.constants.ActivateStatus"/>
+                     javaType="com.keaper.vote.common.enums.ActivateStatus"/>
     </typeHandlers>
 </configuration>

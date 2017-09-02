@@ -35,11 +35,39 @@
             id = #{id}
     </select>
 
+    <select id="selectIdExistByEmail" resultType="boolean">
+        SELECT
+            COUNT(user.id)
+        FROM
+            user
+        WHERE
+            email = #{email}
+    </select>
+
+    <select id="selectIdExistByPhone" resultType="boolean">
+        SELECT
+            COUNT(user.id)
+        FROM
+            user
+        WHERE
+            phone = #{phone}
+    </select>
+
+    <select id="selectIDExistByNick" resultType="boolean">
+        SELECT
+            COUNT(user.id)
+        FROM
+            user
+        WHERE
+            nick_name = #{nickName}
+    </select>
+
+
     <insert id="insertUser">
         INSERT INTO user (
           nick_name,
           <if test="email != null">
-                email,
+              email,
           </if>
           <if test="phone != null">
               phone,
@@ -68,5 +96,16 @@
           </choose>
           #{activateCode})
     </insert>
+
+    <select id="selectUserByEmailAndPassword" resultMap="userMap">
+        SELECT
+            <include refid="allColumns"/>
+        FROM
+            user
+        WHERE
+            email = #{email}
+        AND
+            password = #{password}
+    </select>
 
 </mapper>
