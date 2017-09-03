@@ -1,16 +1,13 @@
 package com.keaper.vote.web.controller;
 
 
-import com.google.code.kaptcha.Constants;
 import com.keaper.vote.common.constants.CaptchaReference;
 import com.keaper.vote.common.enums.ActivateStatus;
 import com.keaper.vote.common.utils.BufferedImageUtils;
 import com.keaper.vote.persistence.po.User;
 import com.keaper.vote.service.CaptchaService;
 import com.keaper.vote.web.vo.JsonResult;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,14 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 

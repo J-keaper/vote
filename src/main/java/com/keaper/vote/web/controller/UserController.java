@@ -10,13 +10,13 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -29,23 +29,19 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public JsonResult login(LoginParam loginParam,Model model){
+    public JsonResult login(LoginParam loginParam, HttpSession session){
         logger.info("参数LoginParam：{}",loginParam);
 //        captcha error
-//        if(!StringUtils.equals(loginParam.getVcode().toLowerCase(),
-//                request.getSession().getAttribute().toString().toLowerCase())){
-//            return JsonResult.getErrorResult(
-//                    JsonResult.Code.LOGIN_VCODE_ERROR.name(),
-//                    JsonResult.Code.LOGIN_VCODE_ERROR.getCode(),
-//                    null);
-//        }
-        if(!StringUtils.equals(loginParam.getVcode().toLowerCase(),
-                model.asMap().get(CaptchaReference.LOGIN_CAPTCHA_SESSION_KEY).toString())){
+        logger.info("session中{}：{}",CaptchaReference.LOGIN_CAPTCHA_SESSION_KEY,
+                session.getAttribute(CaptchaReference.LOGIN_CAPTCHA_SESSION_KEY));
+        if(!StringUtils.equalsIgnoreCase(loginParam.getVcode(),
+                session.getAttribute(CaptchaReference.LOGIN_CAPTCHA_SESSION_KEY).toString())){
             return JsonResult.getErrorResult(
                     JsonResult.Code.LOGIN_VCODE_ERROR.name(),
                     JsonResult.Code.LOGIN_VCODE_ERROR.getCode(),
                     null);
         }
+
         //Email not Exist
         if(!userService.judgeEmailExist(loginParam.getEmail())){
             logger.info("登录邮箱不存在！");
@@ -58,7 +54,8 @@ public class UserController {
         if( user != null){
             //login success
             logger.info("登录成功！");
-            //存session
+            session.setAttribute("isLogin",true);
+            session.setAttribute("userInfo",user);
             return JsonResult.getCorrectResult(user);
         }
         //Password not match
