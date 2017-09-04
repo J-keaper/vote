@@ -10,6 +10,8 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -102,5 +104,12 @@ public class UserController {
                 JsonResult.Code.REGISTER_FAIL.name(),JsonResult.Code.REGISTER_FAIL.getCode(),null
         );
     }
-
+    @RequestMapping("/account/{userId}")
+    public String getAccountInfo(@PathVariable("userId") int id, HttpSession session,
+                                 Model model){
+        User user = userService.getUserInfoById(id);
+        model.addAttribute("userInfo",user);
+        model.addAttribute("pageIndex","account");
+        return "account";
+    }
 }

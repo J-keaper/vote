@@ -20,20 +20,32 @@
     <script th:src="@{/assets/js/messages_zh.min.js}"></script>
     <script th:src="@{/assets/js/bootstrap.min.js}"></script>
 
-    <title>首页</title>
+    <title>账户信息</title>
 
     <style th:include="header::#navbar-container-style"></style>
     <style th:include="footer::#footer-container-style"></style>
 
+    <style th:include="manageMean::#mean-navbar-style"></style>
 
 </head>
 <body>
-    <div th:replace="header::#navbar-container"></div>
 
+<!--Header-->
+<div th:replace="header::#navbar-container"></div>
 
-    <div th:replace="footer::#footer-container"></div>
+<!--content-->
+<div class="container">
+    <div class="row">
+        <div th:replace="manageMean::#mean-navbar"></div>
+        <div class="col-sm-10">
 
-    <script th:replace="header::#navbar-container-script"></script>
+        </div>
+    </div>
 
+</div>
+<!--Footer-->
+<div th:replace="footer::#footer-container"></div>
+
+<script th:replace="header::#navbar-container-script"></script>
 </body>
 </html>

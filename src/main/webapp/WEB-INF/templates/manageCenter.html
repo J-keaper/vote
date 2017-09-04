@@ -20,20 +20,30 @@
     <script th:src="@{/assets/js/messages_zh.min.js}"></script>
     <script th:src="@{/assets/js/bootstrap.min.js}"></script>
 
-    <title>首页</title>
+    <title>管理中心</title>
 
     <style th:include="header::#navbar-container-style"></style>
     <style th:include="footer::#footer-container-style"></style>
 
+    <style th:include="manageMean::#manage-mean-style"></style>
 
 </head>
 <body>
-    <div th:replace="header::#navbar-container"></div>
+<!--Header-->
+<div th:replace="header::#navbar-container"></div>
 
+<!--content-->
+<div class="container">
+    <div th:insert="manageMean::#mean-navbar">
+        <div class="col-sm-10">
+            Hello
+        </div>
+    </div>
+</div>
+<!--Footer-->
+<div th:replace="footer::#footer-container"></div>
 
-    <div th:replace="footer::#footer-container"></div>
-
-    <script th:replace="header::#navbar-container-script"></script>
+<script th:replace="header::#navbar-container-script"></script>
 
 </body>
 </html>

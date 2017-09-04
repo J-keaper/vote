@@ -46,6 +46,12 @@ public class UserService {
         return userDao.selectUserByEmailAndPassword(loginParam.getEmail(),loginParam.getPassword());
     }
 
+
+    public User getUserInfoById(int id){
+        logger.info("查询Id:{}",id);
+        return userDao.selectUserInfoById(id);
+    }
+
     /**
      * 构造User对象
      * @param registerParam
