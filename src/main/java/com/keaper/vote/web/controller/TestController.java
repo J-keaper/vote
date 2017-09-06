@@ -92,8 +92,20 @@ public class TestController {
     }
 
 
-    @RequestMapping("/page/{page}")
-    public String getPage(@PathVariable("page") String pageName){
-            return pageName;
+//    @RequestMapping("/page/{page}")
+//    public String getPage(@PathVariable("page") String pageName){
+//            return pageName;
+//    }
+//
+
+    @RequestMapping("ueditor")
+    public String ueditor(){
+        return "UEditor";
     }
+
+    @RequestMapping("createVode")
+    public String createVode(){
+        return "createVote";
+    }
+
 }

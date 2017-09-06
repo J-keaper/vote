@@ -3,10 +3,11 @@ package com.keaper.vote.service;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-@Component
+@Service
 public class EmailService {
 
     private static String CAPTCHAMAILSUBJECT = "验证码";
