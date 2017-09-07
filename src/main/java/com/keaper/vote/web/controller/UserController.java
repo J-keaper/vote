@@ -110,6 +110,6 @@ public class UserController {
         User user = userService.getUserInfoById(id);
         model.addAttribute("userInfo",user);
         model.addAttribute("pageIndex","account");
-        return "account";
+        return "components/user_info/account";
     }
 }

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script th:src="@{/assets/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+    <script th:src="@{/assets/js/messages_zh.min.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
+
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/semantic.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../assets/js/jquery-3.2.1.min.js"></script>
+    <script src="../assets/js/jquery.validate.min.js"></script>
+    <script src="../assets/js/messages_zh.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/semantic.min.js"></script>
+
+    <script src="../assets/js/jquery-ui.min.js"></script>
+
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
+
+    <!-- share.css -->
+    <link rel="stylesheet" href="../assets/css/share.min.css">
+
+    <!-- share.js -->
+    <script src="../assets/js/jquery.share.min.js"></script>
+    <!--当你使用类名为 `social-share` 或者 `social-share` 时不需要手动初始化-->
+
+
+    <title>创建投票</title>
+
+    <style th:include="header::#navbar-container-style"></style>
+    <style th:include="footer::#footer-container-style"></style>
+
+    <style>
+        #create-vote-steps-bar {
+            width: 100%;
+            margin-top: 0;
+        }
+
+        #create-vote-steps-bar .checkmark {
+            color: #21ba45;
+        }
+
+        #create-vote-steps-bar .edit {
+            color: #4183c4;
+        }
+
+        #step-buttons {
+            margin-right: 10px;
+        }
+
+        #step-buttons button {
+            margin: 0 5px;
+        }
+
+        /*CSS优先级真蛋疼*/
+
+        .panel-default .tb-no-border {
+            border: none;
+        }
+
+        .options-row input {
+            margin: 5px;
+        }
+
+        .options-row .glyphicon {
+            font-size: 22px;
+            margin-left: 20px;
+        }
+
+        .options-row .fill-space {
+            margin-left: 100px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div th:replace="header::#navbar-container"></div>
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>创建投票</h2>
+            <hr>
+            <div class="ui mini steps" id="create-vote-steps-bar">
+                <div class="active step" id="create-vote-steps-bar1">
+                    <i class="edit icon"></i>
+                    <div class="content">
+                        <div class="title">基本信息</div>
+                        <div class="description">
+                            填写投票基本信息
+                        </div>
+                    </div>
+                </div>
+                <div class="disabled step" id="create-vote-steps-bar2">
+                    <i class="wait icon"></i>
+                    <div class="content">
+                        <div class="title">投票选项</div>
+                        <div class="description">
+                            添加投票选项
+                        </div>
+                    </div>
+                </div>
+                <div class="disabled step" id="create-vote-steps-bar3">
+                    <i class="wait icon"></i>
+                    <div class="content">
+                        <div class="title">功能设置</div>
+                        <div class="description">
+                            设置投票功能
+                        </div>
+                    </div>
+                </div>
+                <div class="disabled step" id="create-vote-steps-bar4">
+                    <i class="wait icon"></i>
+                    <div class="content">
+                        <div class="title">发布分享</div>
+                        <div class="description">
+                            获取投票入口和分享
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="create-vote-step1">
+                <div class="panel-heading">
+                    <h3>第一步：填写投票信息</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="vote-title" class="col-sm-2 control-label">投票活动标题</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="vote-title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vote-description" class="col-sm-2 control-label">活动描述</label>
+                            <div class="col-sm-10">
+                                <!-- 加载编辑器的容器 -->
+                                <script id="vote-description" name="content" type="text/plain"></script>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vote-after-show" class="col-sm-2 control-label">投票完成后显示信息</label>
+                            <div class="col-sm-10">
+                                <!-- 加载编辑器的容器 -->
+                                <script id="vote-after-show" name="content" type="text/plain">考核表</script>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="create-vote-step2">
+                <div class="panel-heading">
+                    <h3>第二步：添加投票选项</h3>
+                </div>
+                <div class="panel-body">
+                    <h4>选项设置</h4>
+                    <hr>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">单选/多选</label>
+                            <div class="col-sm-10">
+                                <div class="radio">
+                                    <label><input type="radio" name="choiceType" id="choice-type-single"
+                                                  checked>单选</label>
+                                    <label><input type="radio" name="choiceType" id="choice-type-multiple">多选</label>
+                                    <label><input type="radio" name="choiceType" id="choice-type-quick">一键投票</label>
+                                </div>
+                                <div class="col-sm-4" id="choice-count">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td class="tb-no-border"><label class="control-label">最少需选数量</label></td>
+                                            <td class="tb-no-border">
+                                                <select class="form-control input-sm">
+                                                    <option value="1">最少需选1项</option>
+                                                    <option value="2">最少需选2项</option>
+                                                    <option value="3">最少需选3项</option>
+                                                    <option value="4">最少需选4项</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb-no-border"><label class="control-label">最多可选数量</label></td>
+                                            <td class="tb-no-border">
+                                                <select class="form-control input-sm">
+                                                    <option value="1">最多可选1项</option>
+                                                    <option value="2">最多可选2项</option>
+                                                    <option value="3">最多可选3项</option>
+                                                    <option value="4">最多可选4项</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="show-row-count">
+                            <label class="col-sm-2 control-label">排版设置</label>
+                            <div class="col-sm-4">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="tb-no-border">
+                                            <label class="control-label">每行显示选项数量</label>
+                                        </td>
+                                        <td class="tb-no-border">
+                                            <select class="form-control input-sm">
+                                                <option value="1">每行显示1项</option>
+                                                <option value="2">每行显示2项</option>
+                                                <option value="3">每行显示3项</option>
+                                                <option value="4">每行显示4项</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group" id="choice-pagination">
+                            <label class="col-sm-2 control-label">选项分页</label>
+                            <div class="col-sm-10">
+                                <div class="radio">
+                                    <label><input type="radio" name="pagination" value="yes" checked>不分页</label>
+                                    <label><input type="radio" name="pagination" value="no">分页</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <table class="table">
+                                        <tr>
+                                            <td class="tb-no-border">
+                                                <label class="control-label">每页显示数量</label>
+                                            </td>
+                                            <td class="tb-no-border">
+                                                <select class="form-control input-sm">
+                                                    <option value="5">每行显示5项</option>
+                                                    <option value="10">每行显示10项</option>
+                                                    <option value="15">每行显示15项</option>
+                                                    <option value="20">每行显示20项</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <h4>添加选项</h4>
+                    <hr>
+                    <form class="form-horizontal">
+                        <form class="form-group">
+                            <label class="col-sm-2 control-label">投票选项</label>
+                            <div class="col-sm-10">
+                                <table>
+                                    <tbody>
+                                    <tr class="options-row">
+                                        <td class="col-sm-6"><input type="text" class="form-control input-sm"></td>
+                                        <td><span class="glyphicon glyphicon-picture"></span></td>
+                                        <td><span class="glyphicon glyphicon-bookmark"></span></td>
+                                        <td><span class="glyphicon glyphicon-link"></span></td>
+                                        <td><span class="glyphicon glyphicon-paperclip"></span></td>
+                                        <td><span class="fill-space"></span></td>
+                                        <td><span class="glyphicon glyphicon-arrow-up"></span></td>
+                                        <td><span class="glyphicon glyphicon-arrow-down"></span></td>
+                                        <td><span class="glyphicon glyphicon-minus"></span></td>
+                                    </tr>
+                                    <tr class="options-row">
+                                        <td class="col-sm-6"><input type="text" class="form-control input-sm"></td>
+                                        <td><span class="glyphicon glyphicon-picture"></span></td>
+                                        <td><span class="glyphicon glyphicon-bookmark"></span></td>
+                                        <td><span class="glyphicon glyphicon-link"></span></td>
+                                        <td><span class="glyphicon glyphicon-paperclip"></span></td>
+                                        <td><span class="fill-space"></span></td>
+                                        <td><span class="glyphicon glyphicon-arrow-up"></span></td>
+                                        <td><span class="glyphicon glyphicon-arrow-down"></span></td>
+                                        <td><span class="glyphicon glyphicon-minus"></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </form>
+
+                    <h4>投票信息收集</h4>
+                    <hr>
+                    
+
+                </div>
+            </div>
+            <div class="panel panel-default" id="create-vote-step3">
+                <div class="panel-heading">
+                    <h3>第三步：功能选项设置</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">投票开始时间</label>
+                            <div class="col-sm-6">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td class="tb-no-border">
+                                            <input name="set-start-time" type="radio">
+                                            <label class="control-label">不设开始时间</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tb-no-border">
+                                            <input name="set-start-time" type="radio">
+                                            <label class="control-label">指定开始时间</label>
+                                            <input class="form-control input-sm " style="width: 50%;display: inline"
+                                                   type="text" id="start-datepicker">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">投票截止时间</label>
+                            <div class="col-sm-6">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td class="tb-no-border">
+                                            <input name="set-end-time" type="radio">
+                                            <label class="control-label">不设截止时间</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tb-no-border">
+                                            <input name="set-end-time" type="radio">
+                                            <label class="control-label">指定截止时间</label>
+                                            <input class="form-control input-sm " style="width: 50%;display: inline"
+                                                   type="text" id="end-datepicker">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">IP限制规则</label>
+                            <div class="col-sm-10">
+                                <label class="control-label" style="width: 80px">同一IP </label>
+                                <select class="form-control input-sm" style="display: inline;width:100px;">
+                                    <option value="30">30分钟</option>
+                                    <option value="60">1小时</option>
+                                    <option value="120">2小时</option>
+                                    <option value="360">6小时</option>
+                                    <option value="720">12小时</option>
+                                </select>
+                                <label class="control-label">内只能投票</label>
+                                <input type="number" class="form-control input-sm" style="display: inline;width: 50px"
+                                       value="1">
+                                <label class="control-label">次</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设备限制规则</label>
+                            <div class="col-sm-10">
+                                <label class="control-label" style="width: 80px;">同一设备</label>
+                                <select class="form-control input-sm" style="display: inline;width:100px;">
+                                    <option value="30">30分钟</option>
+                                    <option value="60">1小时</option>
+                                    <option value="120">2小时</option>
+                                    <option value="360">6小时</option>
+                                    <option value="720">12小时</option>
+                                </select>
+                                <label class="control-label">内只能投票</label>
+                                <input type="number" class="form-control input-sm" style="display: inline;width: 50px"
+                                       value="1">
+                                <label class="control-label">次</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">网页验证码</label>
+                            <div class="col-sm-10">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="page-vcode">
+                                            <label class="control-label">启用</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="page-vcode">
+                                            <label class="control-label">禁用</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮箱验证码</label>
+                            <div class="col-sm-10">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="email-vcode">
+                                            <label class="control-label">启用</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="email-vcode">
+                                            <label class="control-label">禁用</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">手机短信验证</label>
+                            <div class="col-sm-10">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="sms-vcode">
+                                            <label class="control-label">启用</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="sms-vcode">
+                                            <label class="control-label">禁用</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">QQ号验证</label>
+                            <div class="col-sm-10">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="QQ-verify">
+                                            <label class="control-label">启用</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="QQ-verify">
+                                            <label class="control-label">禁用</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设置投票密码</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="col-sm-6 form-control input-sm" name="vote-password">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default" id="create-vote-step4">
+                <div class="panel-heading">
+                    <h3>第四步：发布与分享</h3>
+                </div>
+                <div class="panel-body">
+                    <h4>投票入口</h4>
+                    <hr>
+                    <table class="table">
+                        <tr>
+                            <td class="col-sm-4 tb-no-border">
+                                <div class="well" style="display: inline;padding: 10px 5px 5px 5px;">
+                                    <label class="control-label" style="font-size:20px;padding:5px">
+                                        <a class="bordered" href="http://nhkal3.v.vote8.cn/">http://keaper.v.vote8.cn/</a>
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="tb-no-border">
+                                <button class="btn btn-default">复制链接</button>
+                                <button class="btn btn-default">修改个性网址</button>
+                                <button class="btn btn-default">预览</button>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h4>社交媒体分享</h4>
+                    <hr>
+                    <div class="social-share"></div>
+                </div>
+            </div>
+                <div id="step-buttons">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-default" id="pre-step" disabled>上一步</button>
+                        <button type="button" class="btn btn-default" id="next-step">下一步</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="footer::#footer-container"></div>
+
+<script th:replace="header::#navbar-container-script"></script>
+
+<script>
+    var step = 1;
+    $(function () {
+        $('#start-datepicker').datepicker();
+        $('#end-datepicker').datepicker();
+
+        $('.social-share').share();
+        onStepChange();
+    });
+
+    function onStepChange() {
+        for(var i = 1;i<=4;i++){
+            if(step == i){
+                $('#create-vote-step'+i).show();
+            }else{
+                $('#create-vote-step'+i).hide();
+            }
+        }
+        if(step==1){
+            $('#pre-step').attr('disabled',true);
+        }else{
+            $('#pre-step').attr('disabled',false);
+        }
+        if(step==4){
+            $('#next-step').html("完成");
+            //提交
+        }else{
+            $('#next-step').html('上一步');
+            $('#next-step').attr('disabled',false);
+        }
+    }
+    $('#next-step').click(function () {
+        $('#create-vote-steps-bar'+step).removeClass('active').addClass('completed');
+        $('#create-vote-steps-bar'+step+' i').removeClass('edit').addClass('checkmark');
+        step++;
+        $('#create-vote-steps-bar'+step).removeClass('disabled').addClass('active');
+        $('#create-vote-steps-bar'+step+' i').removeClass('wait').addClass('edit');
+        onStepChange();
+    });
+    $('#pre-step').click(function () {
+        $('#create-vote-steps-bar'+step).removeClass('active').addClass('disabled');
+        $('#create-vote-steps-bar'+step+' i').removeClass('edit').addClass('wait');
+        step--;
+        $('#create-vote-steps-bar'+step).removeClass('completed').addClass('active');
+        $('#create-vote-steps-bar'+step+' i').removeClass('checkmark').addClass('edit');
+        onStepChange();
+    });
+</script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('vote-description');
+</script>
+
+<script type="text/javascript">
+    var ue = UE.getEditor('vote-after-show');
+</script>
+
+</body>
+</html>

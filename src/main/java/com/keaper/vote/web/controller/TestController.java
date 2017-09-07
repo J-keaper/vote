@@ -105,7 +105,12 @@ public class TestController {
 
     @RequestMapping("createVode")
     public String createVode(){
-        return "createVote";
+        return "components/create_vote/create_vote";
     }
 
+
+    @RequestMapping("pages")
+    public String testPage(){
+        return "components/user-info/account";
+    }
 }

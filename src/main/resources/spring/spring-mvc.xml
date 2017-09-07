@@ -9,7 +9,7 @@
 
     <mvc:annotation-driven />
 
-    <mvc:resources mapping="/assets/**" location="WEB-INF/assets/" />
+    <mvc:resources mapping="/assets/**" location="/assets/" />
     <mvc:resources mapping="/ueditor/**" location="/ueditor/" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
