@@ -54,4 +54,22 @@ public interface UserDao {
      */
     User selectUserByEmailAndPassword(@Param("email") String email,
                                       @Param("password") String password);
+
+
+    /**
+     * 根据ID查用户
+     * @param email
+     * @return
+     */
+    int selectIdByEmail(@Param("email")String email);
+
+
+    /**
+     * 更新密碼
+     * @param id
+     * @param password
+     * @return
+     */
+    int updatePasswordById(@Param("id") int id,
+                               @Param("password") String password);
 }

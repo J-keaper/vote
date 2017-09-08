@@ -108,4 +108,22 @@
             password = #{password}
     </select>
 
+    <select id="selectIdByEmail" resultType="int">
+        SELECT
+            user.id
+        FROM
+            user
+        WHERE
+            user.email = #{email}
+    </select>
+
+    <update id="updatePasswordById">
+        UPDATE
+            user
+        SET
+            user.password = #{password}
+        WHERE
+            user.id = #{id}
+    </update>
+
 </mapper>

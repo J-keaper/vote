@@ -67,4 +67,8 @@ public class UserService {
         user.setActivateCode(UUID.randomUUID().toString().replaceAll("-", ""));
         return user;
     }
+
+
+
+
 }

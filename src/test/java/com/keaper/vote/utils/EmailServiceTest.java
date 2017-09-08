@@ -2,6 +2,7 @@ package com.keaper.vote.utils;
 
 import com.keaper.vote.BaseSpringTest;
 import com.keaper.vote.service.EmailService;
+import com.keaper.vote.service.ResetPasswordService;
 import org.junit.Test;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
@@ -15,6 +16,9 @@ public class EmailServiceTest extends BaseSpringTest{
     @Resource
     private JavaMailSenderImpl mailSender;
 
+    @Resource
+    private ResetPasswordService resetPasswordService;
+
     @Test
     public void testMailSenderProperty(){
         System.out.println(mailSender.getHost());
@@ -24,8 +28,10 @@ public class EmailServiceTest extends BaseSpringTest{
 
 
     @Test
-    public void sendCaptchaMail() throws Exception {
-        emailService.sendCaptchaMail("1042137827@qq.com","123456");
+    public void testSendResetPasswordEmail(){
+        emailService.sendResetPasswordEmail("1273570695@qq.com",
+                resetPasswordService.generateResetPasswordUrlAndRecord("1273570695@qq.com"));
     }
+
 
 }
