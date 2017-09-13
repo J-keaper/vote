@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keaper.vote.persistence.dao.VoteOptionDao">
+    <insert id="insertOptions" parameterType="VoteOption">
+        INSERT INTO
+            vote_option(
+                vote_id,
+                title,
+                summary,
+                image_url,
+                external_link,
+                detail_url,
+                rank_position
+            ) VALUES
+            <foreach collection="list" item="item" index="index" separator=",">
+                (#{item.voteId},
+                #{item.title},
+                #{item.summary},
+                #{item.imageUrl},
+                #{item.externalLink},
+                #{item.detailUrl},
+                #{item.rankPosition}
+                )
+            </foreach>
+    </insert>
+</mapper>

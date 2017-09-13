@@ -1,7 +1,5 @@
 package com.keaper.vote.web.vo;
 
-import com.alibaba.fastjson.JSON;
-
 import java.io.Serializable;
 
 public class JsonResult<T> implements Serializable {
@@ -95,7 +93,9 @@ public class JsonResult<T> implements Serializable {
 
         RESET_PASSWORD_FAIL(301,"重置密码失败"),
         RESET_PASSWORD_EMAIL_NOT_EXIST(302,"邮箱不存在"),
-        RESET_PASSWORD_VCODE_ERROR(303,"验证码错误");
+        RESET_PASSWORD_VCODE_ERROR(303,"验证码错误"),
+
+        UPLOAD_IMAGE_FAIL(401,"上传图片失败");
 
 
         int  code;

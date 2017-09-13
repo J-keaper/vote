@@ -8,52 +8,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet">
-
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <script th:src="@{/assets/js/jquery-3.2.1.min.js}"></script>
-    <script th:src="@{/assets/js/jquery.validate.min.js}"></script>
-    <script th:src="@{/assets/js/messages_zh.min.js}"></script>
-    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
-
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/semantic.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="../assets/js/jquery-3.2.1.min.js"></script>
-    <script src="../assets/js/jquery.validate.min.js"></script>
-    <script src="../assets/js/messages_zh.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/semantic.min.js"></script>
-
-    <script src="../assets/js/jquery-ui.min.js"></script>
-
-    <!-- 配置文件 -->
-    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
-    <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
-
+    <!--bootstrap css-->
+    <link href="/vote/src/main/webapp/assets/bootstrap-3.3.7/css/bootstrap.min.css"
+            th:href="@{/assets/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet">
     <!-- share.css -->
-    <link rel="stylesheet" href="../assets/css/share.min.css">
+    <link href="/vote/src/main/webapp/assets/overtrue-share.js/css/share.min.css"
+          th:href="@{/assets/overtrue-share.js/css/share.min.css}" rel="stylesheet">
+    <!--Semantic-UI CSS-->
+    <link href="/vote/src/main/webapp/assets/Semantic-UI/semantic.min.css"
+          th:href="@{/assets/Semantic-UI/semantic.min.css}" rel="stylesheet">
+    <!--jquery ui css-->
+    <link href="/vote/src/main/webapp/assets/jquery-ui-1.12.1/jquery-ui.min.css"
+          th:href="@{/assets/jquery-ui-1.12.1/jquery-ui.min.css}" rel="stylesheet">
+
+    <!--jquery js-->
+    <script src="/vote/src/main/webapp/assets/jquery-3.2.1/jquery-3.2.1.min.js"
+            th:src="@{/assets/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+    <!--jquery.validate js-->
+    <script src="/vote/src/main/webapp/assets/jquery-validation-1.17.0/jquery.validate.min.js"
+            th:src="@{/assets/jquery-validation-1.17.0/jquery.validate.min.js}"></script>
+    <script src="/vote/src/main/webapp/assets/jquery-validation-1.17.0/localization/messages_zh.min.js"
+            th:src="@{/assets/jquery-validation-1.17.0/localization/messages_zh.min.js}"></script>
+
+    <!--Semantic-UI js-->
+    <script src="/vote/src/main/webapp/assets/Semantic-UI/semantic.min.js"
+            th:src="@{/assets/Semantic-UI/semantic.min.js}"></script>
+    <!--jquery ui js-->
+    <script src="/vote/src/main/webapp/assets/jquery-ui-1.12.1/jquery-ui.min.js"
+            th:src="@{/assets/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
+    <!--bootstrap js-->
+    <script src="/vote/src/main/webapp/assets/bootstrap-3.3.7/js/bootstrap.min.js"
+            th:src="@{/assets/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+
+    <!--ueditor-->
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"
+            th:src="@{/ueditor/ueditor.config.js}"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"
+            th:src="@{/ueditor/ueditor.all.min.js}"></script>
 
     <!-- share.js -->
-    <script src="../assets/js/jquery.share.min.js"></script>
+    <script src="/vote/src/main/webapp/assets/overtrue-share.js/js/social-share.min.js"
+            th:src="@{/assets/overtrue-share.js/js/social-share.min.js}"></script>
     <!--当你使用类名为 `social-share` 或者 `social-share` 时不需要手动初始化-->
-
 
     <title>创建投票</title>
 
-    <style th:include="header::#navbar-container-style"></style>
-    <style th:include="footer::#footer-container-style"></style>
+    <style th:include="/commons/header::#navbar-container-style"></style>
+    <style th:include="/commons/footer::#footer-container-style"></style>
 
     <style>
         #create-vote-steps-bar {
@@ -77,7 +80,6 @@
             margin: 0 5px;
         }
 
-        /*CSS优先级真蛋疼*/
 
         .panel-default .tb-no-border {
             border: none;
@@ -91,16 +93,10 @@
             font-size: 22px;
             margin-left: 20px;
         }
-
-        .options-row .fill-space {
-            margin-left: 100px;
-        }
-
-
     </style>
 </head>
 <body>
-<div th:replace="header::#navbar-container"></div>
+<div th:replace="/commons/header::#navbar-container"></div>
 
 <div class="container">
     <div class="panel panel-default">
@@ -151,11 +147,11 @@
                     <h3>第一步：填写投票信息</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" id="create-vote-step1-form">
                         <div class="form-group">
                             <label for="vote-title" class="col-sm-2 control-label">投票活动标题</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="vote-title">
+                                <input type="text" class="form-control" id="vote-title" name="vote-title">
                             </div>
                         </div>
                         <div class="form-group">
@@ -183,15 +179,14 @@
                 <div class="panel-body">
                     <h4>选项设置</h4>
                     <hr>
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" id="create-vote-step2-form">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">单选/多选</label>
                             <div class="col-sm-10">
                                 <div class="radio">
-                                    <label><input type="radio" name="choiceType" id="choice-type-single"
-                                                  checked>单选</label>
-                                    <label><input type="radio" name="choiceType" id="choice-type-multiple">多选</label>
-                                    <label><input type="radio" name="choiceType" id="choice-type-quick">一键投票</label>
+                                    <label><input type="radio" class="choice-type-radio" name="choiceType" value="signal"  checked>单选</label>
+                                    <label><input type="radio" class="choice-type-radio" name="choiceType" value="multiple" >多选</label>
+                                    <label><input type="radio" class="choice-type-radio" name="choiceType" value="quick" >一键投票</label>
                                 </div>
                                 <div class="col-sm-4" id="choice-count">
                                     <table class="table">
@@ -199,7 +194,7 @@
                                         <tr>
                                             <td class="tb-no-border"><label class="control-label">最少需选数量</label></td>
                                             <td class="tb-no-border">
-                                                <select class="form-control input-sm">
+                                                <select class="form-control input-sm" id="choice-count-min">
                                                     <option value="1">最少需选1项</option>
                                                     <option value="2">最少需选2项</option>
                                                     <option value="3">最少需选3项</option>
@@ -210,7 +205,7 @@
                                         <tr>
                                             <td class="tb-no-border"><label class="control-label">最多可选数量</label></td>
                                             <td class="tb-no-border">
-                                                <select class="form-control input-sm">
+                                                <select class="form-control input-sm" id="choice-count-max">
                                                     <option value="1">最多可选1项</option>
                                                     <option value="2">最多可选2项</option>
                                                     <option value="3">最多可选3项</option>
@@ -233,7 +228,7 @@
                                             <label class="control-label">每行显示选项数量</label>
                                         </td>
                                         <td class="tb-no-border">
-                                            <select class="form-control input-sm">
+                                            <select class="form-control input-sm" id="choice-pre-row">
                                                 <option value="1">每行显示1项</option>
                                                 <option value="2">每行显示2项</option>
                                                 <option value="3">每行显示3项</option>
@@ -249,21 +244,21 @@
                             <label class="col-sm-2 control-label">选项分页</label>
                             <div class="col-sm-10">
                                 <div class="radio">
-                                    <label><input type="radio" name="pagination" value="yes" checked>不分页</label>
-                                    <label><input type="radio" name="pagination" value="no">分页</label>
+                                    <label><input type="radio" class="choice-pagination-radio" name="pagination" value="off" checked>不分页</label>
+                                    <label><input type="radio" class="choice-pagination-radio" name="pagination" value="on">分页</label>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4" id="choice-pagination-count">
                                     <table class="table">
                                         <tr>
                                             <td class="tb-no-border">
                                                 <label class="control-label">每页显示数量</label>
                                             </td>
                                             <td class="tb-no-border">
-                                                <select class="form-control input-sm">
-                                                    <option value="5">每行显示5项</option>
-                                                    <option value="10">每行显示10项</option>
-                                                    <option value="15">每行显示15项</option>
-                                                    <option value="20">每行显示20项</option>
+                                                <select class="form-control input-sm" id="row-pre-page">
+                                                    <option value="5">每页显示5行</option>
+                                                    <option value="10">每页显示10行</option>
+                                                    <option value="15">每页显示15行</option>
+                                                    <option value="20">每页显示20行</option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -279,38 +274,60 @@
                             <label class="col-sm-2 control-label">投票选项</label>
                             <div class="col-sm-10">
                                 <table>
-                                    <tbody>
+                                    <tbody id="option-list">
                                     <tr class="options-row">
-                                        <td class="col-sm-6"><input type="text" class="form-control input-sm"></td>
-                                        <td><span class="glyphicon glyphicon-picture"></span></td>
-                                        <td><span class="glyphicon glyphicon-bookmark"></span></td>
-                                        <td><span class="glyphicon glyphicon-link"></span></td>
-                                        <td><span class="glyphicon glyphicon-paperclip"></span></td>
-                                        <td><span class="fill-space"></span></td>
+                                        <td class="col-sm-6"><input type="text" class="form-control input-sm" name="option-title"></td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-picture option-image-icon" onclick="onOptionImageIconClick()"></span>
+                                            <input type="hidden" name="option-image-url">
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-bookmark option-summary-icon" onclick="onOptionSummaryIconClick()"></span>
+                                            <input type="hidden" name="option-summary">
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-link option-external-link-icon" onclick="onOptionLinkIconClick()"></span>
+                                            <input type="hidden" name="option-link">
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-paperclip option-detail-icon"></span>
+                                            <input type="hidden" name="option-detail">
+                                        </td>
+                                        <td><span class="fill-space" style="margin-left: 100px;"></span></td>
                                         <td><span class="glyphicon glyphicon-arrow-up"></span></td>
                                         <td><span class="glyphicon glyphicon-arrow-down"></span></td>
                                         <td><span class="glyphicon glyphicon-minus"></span></td>
                                     </tr>
                                     <tr class="options-row">
-                                        <td class="col-sm-6"><input type="text" class="form-control input-sm"></td>
-                                        <td><span class="glyphicon glyphicon-picture"></span></td>
-                                        <td><span class="glyphicon glyphicon-bookmark"></span></td>
-                                        <td><span class="glyphicon glyphicon-link"></span></td>
-                                        <td><span class="glyphicon glyphicon-paperclip"></span></td>
-                                        <td><span class="fill-space"></span></td>
+                                        <td class="col-sm-6"><input type="text" class="form-control input-sm" name="option-title"></td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-picture option-image-icon" onclick="onOptionImageIconClick()"></span>
+                                            <input type="hidden" name="option-image-url">
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-bookmark option-summary-icon" onclick="onOptionSummaryIconClick()"></span>
+                                            <input type="hidden" name="option-summary">
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-link option-external-link-icon" onclick="onOptionLinkIconClick()"></span>
+                                            <input type="hidden" name="option-link">
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-paperclip option-detail-icon"></span>
+                                            <input type="hidden" name="option-detail">
+                                        </td>
+                                        <td><span class="fill-space" style="margin-left: 100px;"></span></td>
                                         <td><span class="glyphicon glyphicon-arrow-up"></span></td>
                                         <td><span class="glyphicon glyphicon-arrow-down"></span></td>
                                         <td><span class="glyphicon glyphicon-minus"></span></td>
                                     </tr>
                                     </tbody>
                                 </table>
+                                <span class="glyphicon glyphicon-plus" style="font-size: 20px;color:#4183c4;padding-left: 20px;"
+                                    id="add-option-icon"></span>
                             </div>
                         </form>
                     </form>
-
-                    <h4>投票信息收集</h4>
-                    <hr>
-                    
 
                 </div>
             </div>
@@ -319,7 +336,7 @@
                     <h3>第三步：功能选项设置</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" id="create-vote-step3-form">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">投票开始时间</label>
                             <div class="col-sm-6">
@@ -327,13 +344,13 @@
                                     <tbody>
                                     <tr>
                                         <td class="tb-no-border">
-                                            <input name="set-start-time" type="radio">
+                                            <input name="voteStartTime"  value="off" type="radio" checked>
                                             <label class="control-label">不设开始时间</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="tb-no-border">
-                                            <input name="set-start-time" type="radio">
+                                            <input name="voteStartTime" value="on" type="radio">
                                             <label class="control-label">指定开始时间</label>
                                             <input class="form-control input-sm " style="width: 50%;display: inline"
                                                    type="text" id="start-datepicker">
@@ -350,13 +367,13 @@
                                     <tbody>
                                     <tr>
                                         <td class="tb-no-border">
-                                            <input name="set-end-time" type="radio">
+                                            <input name="voteEndTime" value="off" type="radio" checked>
                                             <label class="control-label">不设截止时间</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="tb-no-border">
-                                            <input name="set-end-time" type="radio">
+                                            <input name="voteEndTime" value="on" type="radio">
                                             <label class="control-label">指定截止时间</label>
                                             <input class="form-control input-sm " style="width: 50%;display: inline"
                                                    type="text" id="end-datepicker">
@@ -370,7 +387,8 @@
                             <label class="col-sm-2 control-label">IP限制规则</label>
                             <div class="col-sm-10">
                                 <label class="control-label" style="width: 80px">同一IP </label>
-                                <select class="form-control input-sm" style="display: inline;width:100px;">
+                                <select class="form-control input-sm" style="display: inline;width:100px;" id="validate-ip-interval">
+                                    <option value="0">整个投票时间内</option>
                                     <option value="30">30分钟</option>
                                     <option value="60">1小时</option>
                                     <option value="120">2小时</option>
@@ -379,7 +397,7 @@
                                 </select>
                                 <label class="control-label">内只能投票</label>
                                 <input type="number" class="form-control input-sm" style="display: inline;width: 50px"
-                                       value="1">
+                                       value="1" id="validate-ip-count">
                                 <label class="control-label">次</label>
                             </div>
                         </div>
@@ -388,7 +406,8 @@
                             <label class="col-sm-2 control-label">设备限制规则</label>
                             <div class="col-sm-10">
                                 <label class="control-label" style="width: 80px;">同一设备</label>
-                                <select class="form-control input-sm" style="display: inline;width:100px;">
+                                <select class="form-control input-sm" style="display: inline;width:100px;" id="validate-device-interval">
+                                    <option value="0">整个投票时间内</option>
                                     <option value="30">30分钟</option>
                                     <option value="60">1小时</option>
                                     <option value="120">2小时</option>
@@ -397,7 +416,7 @@
                                 </select>
                                 <label class="control-label">内只能投票</label>
                                 <input type="number" class="form-control input-sm" style="display: inline;width: 50px"
-                                       value="1">
+                                       value="1" id="validate-device-count">
                                 <label class="control-label">次</label>
                             </div>
                         </div>
@@ -407,14 +426,14 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="radio" name="page-vcode">
-                                            <label class="control-label">启用</label>
+                                            <input type="radio" name="page-vcode" value="on" checked>
+                                            <label class="control-label" >启用</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="radio" name="page-vcode">
-                                            <label class="control-label">禁用</label>
+                                            <input type="radio" name="page-vcode" value="off">
+                                            <label class="control-label" >禁用</label>
                                         </td>
                                     </tr>
                                 </table>
@@ -426,13 +445,13 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="radio" name="email-vcode">
+                                            <input type="radio" name="email-vcode" value="on">
                                             <label class="control-label">启用</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="radio" name="email-vcode">
+                                            <input type="radio" name="email-vcode" value="off" checked>
                                             <label class="control-label">禁用</label>
                                         </td>
                                     </tr>
@@ -445,13 +464,13 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="radio" name="sms-vcode">
+                                            <input type="radio" name="sms-vcode" value="on">
                                             <label class="control-label">启用</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="radio" name="sms-vcode">
+                                            <input type="radio" name="sms-vcode" value="off" checked>
                                             <label class="control-label">禁用</label>
                                         </td>
                                     </tr>
@@ -459,18 +478,18 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">QQ号验证</label>
+                            <label class="col-sm-2 control-label">QQ登录验证</label>
                             <div class="col-sm-10">
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="radio" name="QQ-verify">
+                                            <input type="radio" name="QQ-verify" value="on" >
                                             <label class="control-label">启用</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="radio" name="QQ-verify">
+                                            <input type="radio" name="QQ-verify" value="off" checked>
                                             <label class="control-label">禁用</label>
                                         </td>
                                     </tr>
@@ -480,7 +499,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">设置投票密码</label>
                             <div class="col-sm-4">
-                                <input type="text" class="col-sm-6 form-control input-sm" name="vote-password">
+                                <input type="text" class="col-sm-6 form-control input-sm" name="vote-password" id="vote-password">
                             </div>
                         </div>
                     </form>
@@ -491,55 +510,175 @@
                     <h3>第四步：发布与分享</h3>
                 </div>
                 <div class="panel-body">
-                    <h4>投票入口</h4>
-                    <hr>
-                    <table class="table">
-                        <tr>
-                            <td class="col-sm-4 tb-no-border">
-                                <div class="well" style="display: inline;padding: 10px 5px 5px 5px;">
-                                    <label class="control-label" style="font-size:20px;padding:5px">
-                                        <a class="bordered" href="http://nhkal3.v.vote8.cn/">http://keaper.v.vote8.cn/</a>
-                                    </label>
-                                </div>
-                            </td>
-                            <td class="tb-no-border">
-                                <button class="btn btn-default">复制链接</button>
-                                <button class="btn btn-default">修改个性网址</button>
-                                <button class="btn btn-default">预览</button>
-                            </td>
-                        </tr>
-                    </table>
+                    <form id="create-vote-step4-form">
+                        <h4>投票入口</h4>
+                        <hr>
+                        <table class="table">
+                            <tr>
+                                <td class="col-sm-4 tb-no-border">
+                                    <div class="well" style="display: inline;padding: 10px 5px 5px 5px;">
+                                        <label class="control-label" style="font-size:20px;padding:5px">
+                                            <a class="bordered" href="http://nhkal3.v.vote8.cn/">http://keaper.v.vote8.cn/</a>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="tb-no-border">
+                                    <button class="btn btn-default">复制链接</button>
+                                    <button class="btn btn-default">修改个性网址</button>
+                                    <button class="btn btn-default">预览</button>
+                                </td>
+                            </tr>
+                        </table>
 
-                    <h4>社交媒体分享</h4>
-                    <hr>
-                    <div class="social-share"></div>
+                        <h4>社交媒体分享</h4>
+                        <hr>
+                        <div class="social-share"></div>
+                    </form>
                 </div>
             </div>
-                <div id="step-buttons">
-                    <div class="text-right">
-                        <button type="button" class="btn btn-default" id="pre-step" disabled>上一步</button>
-                        <button type="button" class="btn btn-default" id="next-step">下一步</button>
+            <div id="step-buttons">
+                <div class="text-right">
+                    <button type="button" class="btn btn-default" id="pre-step" disabled>上一步</button>
+                    <button type="button" class="btn btn-default" id="next-step">下一步</button>
+                </div>
+            </div>
+
+            <div class="modal" id="upload-image-modal" tabindex="-1" role="dialog"
+                 data-keyboard="false" data-backdrop="static" style="overflow: hidden">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">上传配图</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" enctype="multipart/form-data" name="upload-file-form"  id="upload-file-form">
+                                <div id="upload">
+                                    <input class="input-sm" style="width: 50%;display: inline"
+                                           type="file" multiple="multiple" name="file" id="upload-image-file"/>
+                                    <input class="btn btn-default btn-sm" type="button" value="上传" name="submit" id="upload-image-submit"/>
+                                    <input type="hidden" id="option-row-index">
+                                </div>
+                            </form>
+                            <div class="alert alert-success" style="margin: 0;padding: 5px;"
+                                 role="alert" id="upload-success-alert">上传成功！</div>
+                            <div class="alert alert-danger"  style="margin: 0;padding: 5px;"
+                                 role="alert" id="upload-fail-alert">上传失败！</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="modal" id="option-summary-modal" tabindex="-1" role="dialog"
+                 data-keyboard="false" data-backdrop="static" style="overflow: hidden">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">摘要信息</h4>
+                        </div>
+                        <div class="modal-body">
+                            <textarea class="form-control" rows="4" id="option-summary-textarea" value=""></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-option-summary">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal" id="option-external-link-modal" tabindex="-1" role="dialog"
+                 data-keyboard="false" data-backdrop="static" style="overflow: hidden">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">插入链接</h4>
+                        </div>
+                        <div class="modal-body">
+                            <textarea class="form-control" rows="2" id="option-external-link-textarea" value=""></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-option-external-link">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
 
 
-<div th:replace="footer::#footer-container"></div>
+<div th:replace="/commons/footer::#footer-container"></div>
 
-<script th:replace="header::#navbar-container-script"></script>
+<script th:replace="/commons/header::#navbar-container-script"></script>
 
 <script>
     var step = 1;
-    $(function () {
-        $('#start-datepicker').datepicker();
-        $('#end-datepicker').datepicker();
+    $().ready(function () {
+        $('#create-vote-step1').show();
+        $('#create-vote-step2').hide();
+        $('#create-vote-step3').hide();
+        $('#create-vote-step4').hide();
 
-        $('.social-share').share();
-        onStepChange();
+        $('#choice-count').hide();
+        $('#choice-pagination-count').hide();
+
+        $('#upload-success-alert').hide();
+        $('#upload-fail-alert').hide();
+
+        $('#start-datepicker').datepicker({dateFormat: "yy-mm-dd"});
+        $('#end-datepicker').datepicker({dateFormat: "yy-mm-dd"});
+
+        $('#create-vote-step1-form').validate({
+            rules:{
+                "vote-title":{
+                    required:true,
+                    maxlength:50
+                }
+            },messages:{
+                "vote-title":{
+                    required:"请输入标题",
+                    maxlength:"长度不能超过50"
+                }
+            }
+        });
+        $('#create-vote-step2-form').validate({
+            rules:{
+
+            },messages:{
+
+            }
+        });
+
+        $('#create-vote-step3-form').validate({
+            rules:{
+
+            },messages:{
+
+            }
+        });
+
+        $('#create-vote-step4-form').validate({
+            rules:{
+
+            },messages:{
+
+            }
+        });
+
+        var $config = {
+        };
+        $('.social-share').share($config);
     });
 
+//    页面切换
     function onStepChange() {
         for(var i = 1;i<=4;i++){
             if(step == i){
@@ -555,35 +694,242 @@
         }
         if(step==4){
             $('#next-step').html("完成");
-            //提交
         }else{
-            $('#next-step').html('上一步');
+            $('#next-step').html('下一步');
             $('#next-step').attr('disabled',false);
         }
+    };
+
+
+    function countChoiceCountLimit() {
+        var checkedValue = $("input[name='choiceType']:checked").val();
+        if(checkedValue == 'signal'){
+            return new Array(1,1);
+        }else if(checkedValue == 'quick'){
+            return new Array(0,0);
+        }else{
+            return new Array($('#choice-count-min').val(),$('#choice-count-max').val());
+        }
+    };
+
+    function getOptionList() {
+        var optionList = new Array();
+        $('#option-list').find("tr").each(function (index,element) {
+            var tdList = $(this).children();
+            var option = new Object();
+            option['title'] = tdList.eq(0).find('input').val();
+            option['imageUrl'] = tdList.eq(1).find('input').val();
+            option['summary'] = tdList.eq(2).find('input').val();
+            option['externalLink'] = tdList.eq(3).find('input').val();
+            option['detailUrl'] = tdList.eq(4).find('input').val();
+            option['rankPosition'] = index;
+            optionList.push(option);
+        });
+        return optionList;
+    };
+
+    function countPaginationCount() {
+        var checkedValue = $("input[name='pagination']:checked").val();
+        if(checkedValue == 'off'){
+            return 0;
+        }
+        return $('#row-pre-page').val();
     }
+
+    function getStartTime() {
+        var checkedValue = $("input[name='voteStartTime']:checked").val();
+        if(checkedValue == 'off'){
+            return "";
+        }else{
+            return $('#start-datepicker').val();
+        }
+    }
+
+    function getEndTime() {
+        var checkedValue = $("input[name='voteEndTime']:checked").val();
+        if(checkedValue == 'off'){
+            return "";
+        }else{
+            return $('#end-datepicker').val();
+        }
+    }
+
+
     $('#next-step').click(function () {
-        $('#create-vote-steps-bar'+step).removeClass('active').addClass('completed');
-        $('#create-vote-steps-bar'+step+' i').removeClass('edit').addClass('checkmark');
-        step++;
-        $('#create-vote-steps-bar'+step).removeClass('disabled').addClass('active');
-        $('#create-vote-steps-bar'+step+' i').removeClass('wait').addClass('edit');
-        onStepChange();
+        if(step==4){
+            console.log("submit");
+            var title = $('#vote-title').val();
+            var description = $('#vote-description').val();
+            var textAfterVote = $('#vote-after-show').val();
+            var choiceMin = countChoiceCountLimit()[0];
+            var choiceMax = countChoiceCountLimit()[1];
+            var countPerRow = $('#choice-pre-row').val();
+            var paginationCount = countPaginationCount()*countPerRow;
+            var startTime = getStartTime();
+            var endTime = getEndTime();
+            var captchaValidate = $("input[name='page-vcode']:checked").val() == 'on';
+            var ipValidateCode = $('#validate-ip-interval').val()*100 + $('#validate-device-count').val()*1;
+            var deviceValidateCode = $('#validate-device-interval').val()*100 + $('#validate-device-count').val()*1;
+            var emailValidateCode = $("input[name='email-vcode']:checked").val() == 'on' ? 1 : 0;
+            var phoneValidateCode = $("input[name='sms-vcode']:checked").val() == 'on' ? 1 : 0;
+            var QQValidateCode = $("input[name='QQ-verify']:checked").val() == 'on' ? 1 : 0;
+            var votePassword = $("#vote-password").val();
+            var voteOptionList = getOptionList();
+            $.ajax({
+                url:'/vote/create',
+                type:'POST',
+                dataType:"json",
+                contentType:"application/json",
+                data:JSON.stringify({
+                    title:title,
+                    description:description,
+                    textAfterVote:textAfterVote,
+                    choiceMin:choiceMin,
+                    choiceMax:choiceMax,
+                    countPerRow:countPerRow,
+                    paginationCount:paginationCount,
+                    startTime:startTime,
+                    endTime:endTime,
+                    captchaValidate:captchaValidate,
+                    ipValidateCode:ipValidateCode,
+                    deviceValidateCode:deviceValidateCode,
+                    emailValidateCode:emailValidateCode,
+                    phoneValidateCode:phoneValidateCode,
+                    QQValidateCode:QQValidateCode,
+                    votePassword:votePassword,
+                    voteOptionParamList:voteOptionList
+                }),
+                success: function (data) {
+                    if(data.code==0){
+                        alert("success");
+                    }
+                }});
+            return ;
+        }
+        if($('#create-vote-step'+step+'-form').valid()){
+            $('#create-vote-steps-bar'+step).removeClass('active').addClass('completed');
+            $('#create-vote-steps-bar'+step+' i').removeClass('edit').addClass('checkmark');
+            step++;
+            $('#create-vote-steps-bar'+step).removeClass('disabled').addClass('active');
+            $('#create-vote-steps-bar'+step+' i').removeClass('wait').addClass('edit');
+            onStepChange();
+        }
     });
+
+
     $('#pre-step').click(function () {
-        $('#create-vote-steps-bar'+step).removeClass('active').addClass('disabled');
-        $('#create-vote-steps-bar'+step+' i').removeClass('edit').addClass('wait');
-        step--;
-        $('#create-vote-steps-bar'+step).removeClass('completed').addClass('active');
-        $('#create-vote-steps-bar'+step+' i').removeClass('checkmark').addClass('edit');
-        onStepChange();
+        if($('#create-vote-step'+step+'-form').valid()) {
+            $('#create-vote-steps-bar' + step).removeClass('active').addClass('disabled');
+            $('#create-vote-steps-bar' + step + ' i').removeClass('edit').addClass('wait');
+            step--;
+            $('#create-vote-steps-bar' + step).removeClass('completed').addClass('active');
+            $('#create-vote-steps-bar' + step + ' i').removeClass('checkmark').addClass('edit');
+            onStepChange();
+        }
     });
+    
+
+
+    $('.choice-type-radio').change(function () {
+        var checkedValue = $("input[name='choiceType']:checked").val();
+        if(checkedValue == 'signal' || checkedValue == 'quick'){
+            $('#choice-count').hide();
+        }else{
+            $('#choice-count').show();
+        }
+    });
+
+    $('.choice-pagination-radio').change(function () {
+        var checkedValue = $("input[name='pagination']:checked").val();
+        if(checkedValue=='off'){
+            $('#choice-pagination-count').hide();
+        }else{
+            $('#choice-pagination-count').show();
+        }
+    });
+
+
+    $('#add-option-icon').click(function () {
+        console.log("add");
+        var rowContent = $('#option-list').find("tr:eq(0)").html();
+        console.log(rowContent);
+        $('#option-list').append("<tr class=\"options-row\">"+rowContent+"</tr>");
+
+    });
+
+
+    function onOptionImageIconClick() {
+        var rowIndex = $(this).parent().parent().index();
+        $('#upload-image-modal').data('rowIndex', rowIndex);
+        $('#upload-image-modal').modal({show: true});
+    }
+
+    $('.option-image-icon').on('click',function () {
+        var rowIndex = $(this).parent().parent().index();
+        $('#upload-image-modal').data('rowIndex', rowIndex);
+        $('#upload-image-modal').modal({show: true});
+    });
+
+    $('#upload-image-modal').on('hide.bs.modal',function () {
+        $('#upload-success-alert').hide();
+        $('#upload-fail-alert').hide();
+    });
+
+
+    $('#upload-image-submit').click(function () {
+        var rowIndex = $('#upload-image-modal').data('rowIndex');
+        var formData = new FormData();
+        formData.append("file",$('#upload-image-file')[0].files[0]);
+        $.ajax({
+            url:"/upload/image",
+            type:'POST',
+            data:formData,
+            contentType : false,
+            processData : false,
+            success:function (data) {
+                if(data.code==0){
+                    $('#upload-success-alert').show();
+                    //将图片URL存入隐藏的表单域
+                    $('#option-list').children().eq(rowIndex).find('input:eq(1)').val(data.data);
+                }else{
+                    $('#upload-fail-alert').hide();
+                }
+            }
+        });
+    });
+
+    function onOptionSummaryIconClick() {
+        var rowIndex = $(this).parent().parent().index();
+        $('#option-summary-modal').data('rowIndex', rowIndex);
+        $('#option-summary-modal').modal({show: true});
+    }
+
+    $('#save-option-summary').click(function () {
+        var rowIndex = $('#option-summary-modal').data('rowIndex');
+        $('#option-list').children().eq(rowIndex).find('input:eq(2)').val($('#option-summary-textarea').val());
+        $('#option-summary-textarea').val("");
+    });
+
+    function onOptionLinkIconClick() {
+        var rowIndex = $(this).parent().parent().index();
+        $('#option-external-link-modal').data('rowIndex', rowIndex);
+        $('#option-external-link-modal').modal({show: true});
+    }
+
+
+    $('#save-option-external-link').click(function () {
+        var rowIndex = $('#option-external-link-modal').data('rowIndex');
+        $('#option-list').children().eq(rowIndex).find('input:eq(3)').val($('#option-external-link-textarea').val());
+        $('#option-external-link-textarea').val("");
+    });
+
+
+
+
 </script>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
     var ue = UE.getEditor('vote-description');
-</script>
-
-<script type="text/javascript">
     var ue = UE.getEditor('vote-after-show');
 </script>
 

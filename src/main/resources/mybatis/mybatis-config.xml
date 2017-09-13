@@ -3,11 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="com.keaper.vote.persistence.po.User" alias="User"/>
+        <package name="com.keaper.vote.persistence.po"/>
     </typeAliases>
     
     <typeHandlers>
         <typeHandler handler="com.keaper.vote.persistence.handler.ActivateStatusHandler"
                      javaType="com.keaper.vote.common.enums.ActivateStatus"/>
+        <typeHandler handler="com.keaper.vote.persistence.handler.ValidateRuleHandler"
+                     javaType="com.keaper.vote.common.model.ValidateRule"/>
     </typeHandlers>
+
 </configuration>

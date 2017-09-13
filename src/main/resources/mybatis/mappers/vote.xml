@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keaper.vote.persistence.dao.VoteDao">
+    <resultMap id="voteMap" type="Vote">
+        <id property="id" column="id"/>
+        <result property="creatorId" column="creator_id"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <result property="textAfterVote" column="text_after_vote"/>
+        <result property="accessCount" column="access_count"/>
+        <result property="choiceMin" column="choice_min"/>
+        <result property="choiceMax" column="choice_max"/>
+        <result property="countPerRow" column="count_per_row"/>
+        <result property="paginationCount" column="pagination_count"/>
+        <result property="voterInfoCollect" column="voter_info_collect"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="IPValidateRule" column="IP_validate_rule"/>
+        <result property="deviceValidateRule" column="device_validate_rule"/>
+        <result property="emailValidateRule" column="email_validate_rule"/>
+        <result property="phoneValidateRule" column="phone_validate_rule"/>
+        <result property="QQValidateRule" column="QQ_validate_rule"/>
+        <result property="WXValidateRule" column="WX_validate_rule"/>
+        <result property="votePassword" column="vote_password"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+    <sql id="allColumns" >
+            vote.id,
+            vote.creator_id,
+            vote.title,
+            vote.description,
+            vote.text_after_vote,
+            vote.access_count,
+            vote.choice_min,
+            vote.choice_max,
+            vote.count_per_row,
+            vote.pagination_count,
+            vote.voter_info_collect,
+            vote.start_time,
+            vote.end_time,
+            vote.IP_validate_rule,
+            vote.device_validate_rule,
+            vote.email_validate_rule,
+            vote.phone_validate_rule,
+            vote.QQ_validate_rule,
+            vote.WX_validate_rule,
+            vote.vote_password,
+            vote.create_time
+    </sql>
+
+    <insert id="insertOneVote" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="Vote">
+        INSERT INTO
+            vote(
+            creator_id,
+            title,
+            description,
+            text_after_vote,
+            access_count,
+            choice_min,
+            choice_max,
+            count_per_row,
+            pagination_count,
+            voter_info_collect,
+            start_time,
+            end_time,
+            IP_validate_rule,
+            device_validate_rule,
+            email_validate_rule,
+            phone_validate_rule,
+            QQ_validate_rule,
+            WX_validate_rule,
+            vote_password,
+            create_time
+        )VALUES (
+            #{creatorId},
+            #{title},
+            #{description},
+            #{textAfterVote},
+            #{accessCount},
+            #{choiceMin},
+            #{choiceMax},
+            #{countPerRow},
+            #{paginationCount},
+            #{voterInfoCollect},
+            #{startTime},
+            #{endTime},
+            #{IPValidateRule},
+            #{deviceValidateRule},
+            #{emailValidateRule},
+            #{phoneValidateRule},
+            #{QQValidateRule},
+            #{WXValidateRule},
+            #{votePassword},
+            now()
+        )
+    </insert>
+
+    <select id="selectVoteById" resultMap="voteMap">
+      SELECT
+          <include refid="allColumns"/>
+      FROM
+          vote
+      WHERE
+          vote.id = #{id}
+    </select>
+</mapper>
