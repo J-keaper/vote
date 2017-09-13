@@ -39,4 +39,12 @@ public class ValidateRule {
     public void setLimit(int limit) {
         this.limit = limit;
     }
+
+    @Override
+    public String toString() {
+        return "ValidateRule{" +
+                "interval=" + interval +
+                ", limit=" + limit +
+                '}';
+    }
 }

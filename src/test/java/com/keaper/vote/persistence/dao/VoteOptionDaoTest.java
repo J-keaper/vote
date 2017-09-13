@@ -29,4 +29,9 @@ public class VoteOptionDaoTest extends BaseSpringTest{
         voteOptionDao.insertOptions(voteOptionList);
     }
 
+
+    @Test
+    public void selectVoteOptionListById(){
+        System.out.println(voteOptionDao.selectVoteOptionListById(1));
+    }
 }

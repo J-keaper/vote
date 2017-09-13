@@ -56,9 +56,12 @@ public class VoteController {
      * @return
      */
     @RequestMapping(value = "/show/{voteId}",method = RequestMethod.GET)
-    public String showVote(@RequestParam("voteId") int voteId, Model model){
+    public String showVote(@PathVariable("voteId") int voteId, Model model){
         Vote vote = voteService.selectVoteInfoById(voteId);
         model.addAttribute("voteInfo",vote);
+        List<VoteOption> voteOptionList= voteService.selectOptiionListById(1);
+        model.addAttribute("voteOptionList",voteOptionList);
+        logger.info("model:{}",model);
         return "/components/vote-show/vote-show";
     }
 

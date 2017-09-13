@@ -16,4 +16,10 @@ public interface VoteOptionDao {
      */
     int insertOptions(List<VoteOption> voteOptionList);
 
+
+    /**
+     * 查询一个投票对应的选项
+     */
+    List<VoteOption> selectVoteOptionListById(int id);
+
 }

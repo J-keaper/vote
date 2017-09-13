@@ -36,6 +36,10 @@ public class VoteService {
         return voteDao.selectVoteById(id);
     }
 
+    public List<VoteOption> selectOptiionListById(int id){
+        return voteOptionDao.selectVoteOptionListById(id);
+    }
+
     private Vote constructVote(CreateVoteParam createVoteParam, User user){
         Vote vote = new Vote();
         vote.setCreatorId(user.getId());

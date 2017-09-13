@@ -15,10 +15,10 @@ public class HomeController {
     private static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping("/")
-    public String home(HttpSession session){
+    public String home(HttpSession session,Model model){
         logger.info("isLogin:{}",session.getAttribute("isLogin"));
 //        model.addAttribute("isLogin",session.getAttribute("isLogin"));
-//        model.addAttribute("nickName","happy");
+        model.addAttribute("nickName","happy");
         return "index";
     }
 

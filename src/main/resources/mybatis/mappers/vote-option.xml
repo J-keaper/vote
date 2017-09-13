@@ -3,6 +3,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.keaper.vote.persistence.dao.VoteOptionDao">
+    <resultMap id="voteOptionMap" type="VoteOption">
+        <id property="id" column="id"/>
+        <result property="voteId" column="vote_id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="externalLink" column="external_link"/>
+        <result property="detailUrl" column="detail_url"/>
+        <result property="rankPosition" column="rank_position"/>
+    </resultMap>
+
+    <sql id="allColumns">
+            vote_option.id,
+            vote_option.vote_id,
+            vote_option.title,
+            vote_option.summary,
+            vote_option.image_url,
+            vote_option.external_link,
+            vote_option.detail_url,
+            vote_option.rank_position
+    </sql>
+
     <insert id="insertOptions" parameterType="VoteOption">
         INSERT INTO
             vote_option(
@@ -25,4 +47,14 @@
                 )
             </foreach>
     </insert>
+
+
+    <select id="selectVoteOptionListById" resultMap="voteOptionMap">
+        SELECT
+        <include refid="allColumns"></include>
+        FROM
+            vote_option
+        WHERE
+            vote_id = #{id}
+    </select>
 </mapper>
