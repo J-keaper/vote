@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `vote_record`;
 CREATE TABLE `vote_record` (
   `id` int(11) NOT NULL,
   `IP` varchar(255) DEFAULT NULL,
-  `device_mac` varchar(255) DEFAULT NULL,
+  `device` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `QQ` varchar(255) DEFAULT NULL,

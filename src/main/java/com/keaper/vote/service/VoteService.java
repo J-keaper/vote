@@ -2,16 +2,22 @@ package com.keaper.vote.service;
 
 
 import com.keaper.vote.common.model.ValidateRule;
+import com.keaper.vote.common.utils.RequestUtils;
 import com.keaper.vote.model.CreateVoteParam;
 import com.keaper.vote.model.VoteOptionParam;
+import com.keaper.vote.model.VoteRecordParam;
 import com.keaper.vote.persistence.dao.VoteDao;
 import com.keaper.vote.persistence.dao.VoteOptionDao;
+import com.keaper.vote.persistence.dao.VoteRecordDao;
 import com.keaper.vote.persistence.po.User;
 import com.keaper.vote.persistence.po.Vote;
 import com.keaper.vote.persistence.po.VoteOption;
+import com.keaper.vote.persistence.po.VoteRecord;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +30,10 @@ public class VoteService {
     @Resource
     private VoteOptionDao voteOptionDao;
 
+    @Resource
+    private VoteRecordDao voteRecordDao;
 
+    @Transactional
     public boolean createVote(CreateVoteParam createVoteParam,User user ){
         Vote vote = constructVote(createVoteParam,user);
         voteDao.insertOneVote(vote);
@@ -38,6 +47,12 @@ public class VoteService {
 
     public List<VoteOption> selectOptiionListById(int id){
         return voteOptionDao.selectVoteOptionListById(id);
+    }
+
+    public boolean addVoteRecord(List<VoteRecordParam> voteRecordParamList, HttpServletRequest request){
+        List<VoteRecord> voteRecordList = constructVoteRecordList(voteRecordParamList,request);
+        int affectRows = voteRecordDao.addVoteRecord(voteRecordList);
+        return affectRows > 0;
     }
 
     private Vote constructVote(CreateVoteParam createVoteParam, User user){
@@ -80,4 +95,20 @@ public class VoteService {
         return optionList;
     }
 
+    private List<VoteRecord> constructVoteRecordList(List<VoteRecordParam> voteRecordParamList,HttpServletRequest request){
+        List<VoteRecord> voteRecordList = new ArrayList<VoteRecord>();
+        for(VoteRecordParam voteRecordParam:voteRecordParamList){
+            VoteRecord voteRecord = new VoteRecord();
+            voteRecord.setIP(RequestUtils.getIP(request));
+            voteRecord.setdevice(RequestUtils.getUserAgent(request));
+            voteRecord.setVoteId(voteRecordParam.getVoteID());
+            voteRecord.setVoteOptionId(voteRecordParam.getOptionId());
+            voteRecord.setEmail(voteRecordParam.getEmail());
+            voteRecord.setPhone(voteRecordParam.getPhone());
+            voteRecord.setQQ(voteRecordParam.getQQ());
+            voteRecord.setWX(voteRecordParam.getWX());
+            voteRecordList.add(voteRecord);
+        }
+        return voteRecordList;
+    }
 }

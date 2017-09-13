@@ -40,13 +40,6 @@
     <script src="/vote/src/main/webapp/assets/bootstrap-3.3.7/js/bootstrap.min.js"
             th:src="@{/assets/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
 
-    <!--ueditor-->
-    <!-- 配置文件 -->
-    <script type="text/javascript" src="/ueditor/ueditor.config.js"
-            th:src="@{/ueditor/ueditor.config.js}"></script>
-    <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"
-            th:src="@{/ueditor/ueditor.all.min.js}"></script>
 
     <!-- share.js -->
     <script src="/vote/src/main/webapp/assets/overtrue-share.js/js/social-share.min.js"
@@ -60,194 +53,110 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="ui link four cards">
+<div class="container" style="padding-top: 50px">
+    <div class="container navbar-fixed-top">
+        <div class="alert text-center" role="alert" style="padding: 8px" id="submit-alert">超过投票数量限制！</div>
+    </div>
 
+    <div class="ui link four cards" id="option-cards">
         <div class="card" th:each="voteOption,indexStat : ${voteOptionList}">
-            <div class="image" th:if="${voteOption.getImageUrl() ne null}">
+            <div class="image" th:if="${!#strings.isEmpty(voteOption.getImageUrl())}">
                 <img th:src="${voteOption.getImageUrl()}" th:alt="${voteOption.getTitle()}">
             </div>
             <div class="content">
-                <div class="header" th:if="${voteOption.getExternalLink() eq null}" >
+                <div class="header" th:if="${#strings.isEmpty(voteOption.getExternalLink())}" >
                     <span th:text="${voteOption.getTitle()}"></span>
                 </div>
-                <div class="header" th:unless="${voteOption.getExternalLink() eq null}">
-                    <a th:href="${voteOption.getExternalLink()}" th:text="${voteOption.getTitle()}"></a>
+                <div class="header" th:unless="${#strings.isEmpty(voteOption.getExternalLink())}">
+                    <a th:text="${voteOption.getTitle()}" th:href="${voteOption.getExternalLink()}"></a>
                 </div>
-                <div class="description" th:if="${voteOption.getSummary() ne null}"
+                <div class="description" th:if="${!#strings.isEmpty(voteOption.getSummary())}"
                      th:text="${voteOption.getSummary()}"></div>
             </div>
             <div class="extra content">
                 <span class="line-height-30" ><i class="user icon"></i>75(50.3%)</span>
                 <span class="right floated line-height-30">
                     <button class="ui button mini small red vote-button">
-                        <i class="heart icon"></i>投票
+                        <i class="heart icon"></i>
+                        <span>投票</span>
                     </button>
-                    <button class="ui button mini small green selected-button">
-                        <i class="checkmark icon"></i>已选择
-                    </button>
+                    <input type="hidden" th:value="${voteOption.getId()}" id="optionId">
                 </span>
             </div>
         </div>
 
-        <div class="card">
-            <div class="image">
-                <img src="https://semantic-ui.com/images/avatar2/large/matthew.png">
-            </div>
-            <div class="content">
-                <div class="header">Matt Giampietro</div>
-                <div class="description">
-                    Matthew is an interior designer living in New York.
-                </div>
-            </div>
-            <div class="extra content">
-                <span class="line-height-30" ><i class="user icon"></i>75(50.3%)</span>
-                <span class="right floated line-height-30">
-                    <button class="ui button mini small red vote-button">
-                        <i class="heart icon"></i>投票
-                    </button>
-                    <button class="ui button mini small green selected-button">
-                        <i class="checkmark icon"></i>已选择
-                    </button>
-                </span>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image">
-                <img src="https://semantic-ui.com/images/avatar2/large/matthew.png">
-            </div>
-            <div class="content">
-                <div class="header">Matt Giampietro</div>
-                <div class="description">
-                    Matthew is an interior designer living in New York.
-                </div>
-            </div>
-            <div class="extra content">
-                <span class="line-height-30" ><i class="user icon"></i>75(50.3%)</span>
-                <span class="right floated line-height-30">
-                    <button class="ui button mini small red vote-button">
-                        <i class="heart icon"></i>投票
-                    </button>
-                    <button class="ui button mini small green selected-button">
-                        <i class="checkmark icon"></i>已选择
-                    </button>
-                </span>
-            </div>
-        </div>
-        <div class="card">
-            <div class="image">
-                <img src="https://semantic-ui.com/images/avatar2/large/matthew.png">
-            </div>
-            <div class="content">
-                <div class="header">Matt Giampietro</div>
-                <div class="description">
-                    Matthew is an interior designer living in New York.
-                </div>
-            </div>
-            <div class="extra content">
-                <span class="line-height-30" ><i class="user icon"></i>75(50.3%)</span>
-                <span class="right floated line-height-30">
-                    <button class="ui button mini small red vote-button">
-                        <i class="heart icon"></i>投票
-                    </button>
-                    <button class="ui button mini small green selected-button">
-                        <i class="checkmark icon"></i>已选择
-                    </button>
-                </span>
-            </div>
-        </div>
-        <div class="card">
-            <div class="image">
-                <img src="https://semantic-ui.com/images/avatar2/large/matthew.png">
-            </div>
-            <div class="content">
-                <div class="header">Matt Giampietro</div>
-                <div class="description">
-                    Matthew is an interior designer living in New York.
-                </div>
-            </div>
-            <div class="extra content">
-                <span class="line-height-30" ><i class="user icon"></i>75(50.3%)</span>
-                <span class="right floated line-height-30">
-                    <button class="ui button mini small red vote-button">
-                        <i class="heart icon"></i>投票
-                    </button>
-                    <button class="ui button mini small green selected-button">
-                        <i class="checkmark icon"></i>已选择
-                    </button>
-                </span>
-            </div>
-        </div>
-        <div class="card">
-            <div class="image">
-                <img src="https://semantic-ui.com/images/avatar2/large/matthew.png">
-            </div>
-            <div class="content">
-                <div class="header">Matt Giampietro</div>
-                <div class="description">
-                    Matthew is an interior designer living in New York.
-                </div>
-            </div>
-            <div class="extra content">
-                <span class="line-height-30" ><i class="user icon"></i>75(50.3%)</span>
-                <span class="right floated line-height-30">
-                    <button class="ui button mini small red vote-button">
-                        <i class="heart icon"></i>投票
-                    </button>
-                    <button class="ui button mini small green selected-button">
-                        <i class="checkmark icon"></i>已选择
-                    </button>
-                </span>
-            </div>
-        </div>
-        <div class="card">
-            <div class="image">
-                <img src="https://semantic-ui.com/images/avatar2/large/matthew.png">
-            </div>
-            <div class="content">
-                <div class="header">Matt Giampietro</div>
-                <div class="description">
-                    Matthew is an interior designer living in New York.
-                </div>
-            </div>
-            <div class="extra content">
-                <span class="line-height-30" ><i class="user icon"></i>75(50.3%)</span>
-                <span class="right floated line-height-30">
-                    <button class="ui button mini small red vote-button">
-                        <i class="heart icon"></i>投票
-                    </button>
-                    <button class="ui button mini small green selected-button">
-                        <i class="checkmark icon"></i>已选择
-                    </button>
-                </span>
-            </div>
-        </div>
 
         <div class="container text-center" th:if="${voteInfo.getChoiceMax() != 0}">
-            <button class="ui button primary big">
+            <button type="button" class="ui button primary big" id="vote-submit">
                 <i class="checkmark box icon"></i>投票
             </button>
         </div>
     </div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+    /*<![DATA[*/
+        var choiceMin =/*[[${voteInfo.getChoiceMin()}]]*/ 0;
+        var choiceMax =/*[[${voteInfo.getChoiceMax()}]]*/ 0;
+    /*]]>*/
+    var selected = 0;
     $().ready(function () {
-        $('.selected-button').hide();
-    });
-
-    $('.selected-button').click(function () {
-        $(this).hide();
-        $(this).prev().show();
+        $('#submit-alert').hide();
     });
 
     $('.vote-button').click(function () {
-        $(this).hide();
-        $(this).next().show();
+        if($(this).hasClass("red")){
+            if(choiceMax > 1 && selected >= choiceMax){
+                $('#submit-alert').removeClass("alert-warning").addClass("alert-success").html("超出投票数量限制!").slideDown();
+                window.setTimeout(function () {
+                    $('#submit-alert').slideUp();
+                },3000);
+                return ;
+            }
+            if(choiceMax==1 && selected >= 1){
+                $('#option-cards').find("div .vote-button").each(function () {
+                    $(this).removeClass("green").addClass('red');
+                    $(this).children("i").removeClass("checkmark").addClass("heart");
+                    $(this).children("span").html("投票");
+                });
+            }
+            selected++;
+            $(this).removeClass("red").addClass('green');
+            $(this).children("i").removeClass("heart").addClass("checkmark");
+            $(this).children("span").html("已选择");
+            $(this).attr("selected",true);
+        }else{
+            selected--;
+            $(this).removeClass("green").addClass('red');
+            $(this).children("i").removeClass("checkmark").addClass("heart");
+            $(this).children("span").html("投票");
+            $(this).attr("selected",false);
+    }});
+
+
+    $('#vote-submit').click(function () {
+        //检查选择数量
+        if(selected>choiceMax){
+            $('#submit-alert').removeClass("alert-success").addClass("alert-warning").html("超出投票数量限制!").slideDown();
+            window.setTimeout(function () {
+                $('#submit-alert').slideUp();
+            },3000);
+        }
+        if(selected<choiceMin){
+            $('#submit-alert').removeClass("alert-success").addClass("alert-warning").html("不足最少投票数!").slideDown();
+            window.setTimeout(function () {
+                $('#submit-alert').slideUp();
+            },3000);
+        }
+        var selectedList = new Array();
+        $('#option-cards').find("button.vote-button").each(function (index) {
+            if($(this).attr('selected')) {
+                selectedList.push($(this).next().val());
+            }
+        });
+
+
     });
 
-
 </script>
-
 </body>

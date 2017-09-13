@@ -2,6 +2,7 @@ package com.keaper.vote.web.controller;
 
 
 import com.keaper.vote.model.CreateVoteParam;
+import com.keaper.vote.model.VoteRecordParam;
 import com.keaper.vote.persistence.po.User;
 import com.keaper.vote.persistence.po.Vote;
 import com.keaper.vote.persistence.po.VoteOption;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -70,9 +72,9 @@ public class VoteController {
      * @return
      */
     @RequestMapping(value = "/submit",method = RequestMethod.POST)
-    public JsonResult submit(){
+    public JsonResult submit(@RequestBody List<VoteRecordParam> voteRecordParamList,
+                            HttpServletRequest request){
+        voteService.addVoteRecord(voteRecordParamList,request);
         return JsonResult.getCorrectResult(null);
     }
-
-
 }
