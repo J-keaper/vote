@@ -71,9 +71,11 @@ public class VoteController {
      * 投票提交地址
      * @return
      */
+    @ResponseBody
     @RequestMapping(value = "/submit",method = RequestMethod.POST)
     public JsonResult submit(@RequestBody List<VoteRecordParam> voteRecordParamList,
                             HttpServletRequest request){
+        logger.info("voteRecordParamList:{}",voteRecordParamList);
         voteService.addVoteRecord(voteRecordParamList,request);
         return JsonResult.getCorrectResult(null);
     }

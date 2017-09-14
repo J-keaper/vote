@@ -4,20 +4,11 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <style type="text/css" id="footer-container-style"
-           th:fragment="footer-container-style">
-        #footer-container{
-            text-align: center;
-        }
-        #footer-copy{
-            font-family: "Microsoft YaHei UI";
-            font-size: 16px;
-        }
-    </style>
+
 </head>
-<footer id="footer-container" th:fragment="footer-container" >
+<footer id="footer-container" th:fragment="footer-container" style="text-align: center;">
     <hr>
-    <div id="footer-copy">
+    <div id="footer-copy" style="font-family: 'Microsoft YaHei UI';font-size: 16px;">
         &copy;2017 Keaper
     </div>
 </footer>

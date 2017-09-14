@@ -101,7 +101,7 @@ public class VoteService {
             VoteRecord voteRecord = new VoteRecord();
             voteRecord.setIP(RequestUtils.getIP(request));
             voteRecord.setdevice(RequestUtils.getUserAgent(request));
-            voteRecord.setVoteId(voteRecordParam.getVoteID());
+            voteRecord.setVoteId(voteRecordParam.getVoteId());
             voteRecord.setVoteOptionId(voteRecordParam.getOptionId());
             voteRecord.setEmail(voteRecordParam.getEmail());
             voteRecord.setPhone(voteRecordParam.getPhone());

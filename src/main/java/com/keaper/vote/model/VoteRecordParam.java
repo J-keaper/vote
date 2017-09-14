@@ -4,7 +4,7 @@ public class VoteRecordParam {
     /**
      * 投票ID
      */
-    int voteID;
+    int voteId;
     /**
      * 选项ID
      */
@@ -26,12 +26,12 @@ public class VoteRecordParam {
      */
     String WX;
 
-    public int getVoteID() {
-        return voteID;
+    public int getVoteId() {
+        return voteId;
     }
 
-    public void setVoteID(int voteID) {
-        this.voteID = voteID;
+    public void setVoteId(int voteId) {
+        this.voteId = voteId;
     }
 
     public int getOptionId() {
@@ -77,7 +77,7 @@ public class VoteRecordParam {
     @Override
     public String toString() {
         return "VoteRecordParam{" +
-                "voteID=" + voteID +
+                "voteId=" + voteId +
                 ", optionId=" + optionId +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +

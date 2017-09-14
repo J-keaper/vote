@@ -62,7 +62,6 @@ public class UserController {
         if( user != null){
             //login success
             logger.info("登录成功！");
-            session.setAttribute("isLogin",true);
             session.setAttribute("userInfo",user);
             return JsonResult.getCorrectResult(user);
         }

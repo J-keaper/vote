@@ -57,51 +57,104 @@
     <div class="container navbar-fixed-top">
         <div class="alert text-center" role="alert" style="padding: 8px" id="submit-alert">超过投票数量限制！</div>
     </div>
-
-    <div class="ui link four cards" id="option-cards">
-        <div class="card" th:each="voteOption,indexStat : ${voteOptionList}">
-            <div class="image" th:if="${!#strings.isEmpty(voteOption.getImageUrl())}">
-                <img th:src="${voteOption.getImageUrl()}" th:alt="${voteOption.getTitle()}">
-            </div>
-            <div class="content">
-                <div class="header" th:if="${#strings.isEmpty(voteOption.getExternalLink())}" >
-                    <span th:text="${voteOption.getTitle()}"></span>
-                </div>
-                <div class="header" th:unless="${#strings.isEmpty(voteOption.getExternalLink())}">
-                    <a th:text="${voteOption.getTitle()}" th:href="${voteOption.getExternalLink()}"></a>
-                </div>
-                <div class="description" th:if="${!#strings.isEmpty(voteOption.getSummary())}"
-                     th:text="${voteOption.getSummary()}"></div>
-            </div>
-            <div class="extra content">
-                <span class="line-height-30" ><i class="user icon"></i>75(50.3%)</span>
-                <span class="right floated line-height-30">
-                    <button class="ui button mini small red vote-button">
-                        <i class="heart icon"></i>
-                        <span>投票</span>
-                    </button>
-                    <input type="hidden" th:value="${voteOption.getId()}" id="optionId">
-                </span>
-            </div>
+    <div class="vote-info-container">
+        <div class="page-header" style="margin-bottom: 10px">
+            <h1>
+                <span th:text="${voteInfo.getTitle()}">选举大会</span>
+                <small></small>
+            </h1>
         </div>
-
-
-        <div class="container text-center" th:if="${voteInfo.getChoiceMax() != 0}">
-            <button type="button" class="ui button primary big" id="vote-submit">
-                <i class="checkmark box icon"></i>投票
-            </button>
+        <div class="vote-time" style="font-size:16px; width: 30%;display: inline;margin-right: 50px">
+            <i class="wait icon"></i>
+            <span th:text="${#calendars.format(voteInfo.getStartTime(),'yyyy-MM-dd')}">2017-07-08</span>-
+            <span th:text="${#calendars.format(voteInfo.getEndTime(),'yyyy-MM-dd')}">2017-08-08</span>
+        </div>
+        <div class="vote-access" style="font-size:16px;widows:30%;display: inline">
+            <i class="checkmark box icon"></i>
+            访问量<span th:text="${voteInfo.getAccessCount()}">125484</span>次
+        </div>
+        <div class="vote-rule" style="font-size: 16px;padding-top: 10px">
+            <i class="configure icon"></i>
+            投票规则:
+            <span th:if="${voteInfo.getChoiceMax()==1}">
+                单选
+            </span>
+            <span th:if="${voteInfo.getChoiceMax() gt 1}">
+                多选
+                <span th:if="${voteInfo.getChoiceMin()} gt 1" >
+                    至少选 <span th:text="${voteInfo.getChoiceMin()}" style="font-weight: 600">2</span> 项
+                </span>
+                <span >
+                    最多选 <span th:text="${voteInfo.getChoiceMax()}" style="font-weight: 600">2</span> 项
+                </span>
+            </span>
+        </div>
+        <hr style="margin: 10px 0 0 0">
+        <div class="vote-description" style="padding: 10px">
+            <div th:utext="${voteInfo.getDescription()}" style="padding-bottom: 10px">
+                <p>
+                    第十<em>八</em><strong>届人大代表选举</strong>
+                </p>
+            </div>
         </div>
     </div>
+    <div class="vote-option-container">
+        <div class="ui link four cards" id="option-cards">
+            <div class="card" th:each="voteOption,indexStat : ${voteOptionList}">
+                <div class="image" th:if="${!#strings.isEmpty(voteOption.getImageUrl())}">
+                    <img th:src="${voteOption.getImageUrl()}" th:alt="${voteOption.getTitle()}">
+                </div>
+                <div class="content">
+                    <div class="header" th:if="${#strings.isEmpty(voteOption.getExternalLink())}" >
+                        <span th:text="${voteOption.getTitle()}"></span>
+                    </div>
+                    <div class="header" th:unless="${#strings.isEmpty(voteOption.getExternalLink())}">
+                        <a th:text="${voteOption.getTitle()}" th:href="${voteOption.getExternalLink()}"></a>
+                    </div>
+                    <div class="description" th:if="${!#strings.isEmpty(voteOption.getSummary())}"
+                         th:text="${voteOption.getSummary()}"></div>
+                </div>
+                <div class="extra content">
+                    <!--<span class="line-height-30" ><i class="user icon"></i>75(50.3%)</span>-->
+                    <span class="right floated line-height-30">
+                        <button class="ui button mini small red vote-button">
+                            <i class="heart icon"></i>
+                            <span>投票</span>
+                        </button>
+                        <input type="hidden" th:value="${voteOption.getId()}" id="optionId">
+                    </span>
+                </div>
+            </div>
+
+            <div class="container text-center" th:if="${voteInfo.getChoiceMax() != 0}">
+                <button type="button" class="ui button primary big" id="vote-submit">
+                    <i class="checkmark box icon"></i>
+                    <span>投票</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <hr>
+        <div class="social-share"></div>
+    </div>
+    <div th:replace="/commons/footer::#footer-container"></div>
 </div>
 
 <script type="text/javascript" th:inline="javascript">
     /*<![DATA[*/
         var choiceMin =/*[[${voteInfo.getChoiceMin()}]]*/ 0;
         var choiceMax =/*[[${voteInfo.getChoiceMax()}]]*/ 0;
+        var voteId = /*[[${voteInfo.getId()}]]*/ 0 ;
     /*]]>*/
     var selected = 0;
     $().ready(function () {
         $('#submit-alert').hide();
+
+        var $config = {
+        };
+        $('.social-share').share($config);
     });
 
     $('.vote-button').click(function () {
@@ -149,12 +202,28 @@
             },3000);
         }
         var selectedList = new Array();
-        $('#option-cards').find("button.vote-button").each(function (index) {
+        $('#option-cards').find("button.vote-button").each(function () {
             if($(this).attr('selected')) {
-                selectedList.push($(this).next().val());
+                var selectedOption = new  Object();
+                selectedOption["voteId"] = voteId;
+                selectedOption["optionId"] = $(this).next().val();
+                selectedList.push(selectedOption);
             }
         });
 
+        $.ajax({
+            url:"/vote/submit",
+            type:"POST",
+            dataType:"json",
+            contentType:"application/json",
+            data:JSON.stringify(selectedList),
+            success:function (data) {
+                if(data.code==0){
+                    $('#vote-submit').removeClass('primary').addClass("positive");
+                    $('#vote-submit').find('span').html("已投票");
+                }
+            }
+        });
 
     });
 

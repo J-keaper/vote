@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="zh-CN"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:https="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="/assets/bootstrap-3.3.7/css/bootstrap.min.css"
+    <link href="/vote/src/main/webapp/assets/bootstrap-3.3.7/css/bootstrap.min.css"
           th:href="@{/assets/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet">
 
-    <script src="/assets/jquery-3.2.1/jquery-3.2.1.min.js"
+    <script src="/vote/src/main/webapp/assets/jquery-3.2.1/jquery-3.2.1.min.js"
             th:src="@{/assets/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
-    <script src="/assets/jquery-validation-1.17.0/jquery.validate.min.js"
+    <script src="/vote/src/main/webapp/assets/jquery-validation-1.17.0/jquery.validate.min.js"
             th:src="@{/assets/jquery-validation-1.17.0/jquery.validate.min.js}"></script>
-    <script src="/assets/jquery-validation-1.17.0/localization/messages_zh.min.js"
+    <script src="/vote/src/main/webapp/assets/jquery-validation-1.17.0/localization/messages_zh.min.js"
             th:src="@{/assets/jquery-validation-1.17.0/localization/messages_zh.min.js}"></script>
-    <script src="/assets/bootstrap-3.3.7/js/bootstrap.min.js"
+    <script src="/vote/src/main/webapp/assets/bootstrap-3.3.7/js/bootstrap.min.js"
             th:src="@{/assets/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
 
 
     <title>首页</title>
 
     <style th:include="/commons/header::#navbar-container-style"></style>
-    <style th:include="/commons/footer::#footer-container-style"></style>
 
 
 </head>
 <body>
     <div th:replace="/commons/header::#navbar-container"></div>
-
+    <div th:replace="/components/home/home::#home-container"></div>
     <div th:replace="/commons/footer::#footer-container"></div>
-
     <script th:replace="/commons/header::#navbar-container-script"></script>
 
 </body>

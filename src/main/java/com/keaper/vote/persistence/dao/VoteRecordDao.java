@@ -1,6 +1,7 @@
 package com.keaper.vote.persistence.dao;
 
 import com.keaper.vote.persistence.po.VoteRecord;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,9 +12,9 @@ public interface VoteRecordDao {
 
     /**
      * 添加投票记录
-     * @param voteRecord
+     * @param voteRecordList
      * @return
      */
-    int addVoteRecord(List<VoteRecord> voteRecord);
+    int addVoteRecord(List<VoteRecord> voteRecordList);
 
 }

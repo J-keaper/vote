@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:https="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div  th:fragment="home-container" id="home-container"
+        class="jumbotron" style="background-image:url(/assets/custom/image/jumbotron.jpg);
+         background-repeat: no-repeat;background-size:100% 100%; height: 780px;">
+        <div class="container col-sm-6 col-sm-offset-3" style="padding: 50px;margin-top: 100px;">
+            <p style="font-family: 'Microsoft YaHei UI';font-weight: 500;text-indent: 2em">使用投票吧免费创建发起统计公正准确的在线网络投票活动。跨平台支持电脑、手机、微信投票！专业、易用、永久免费！</p>
+            <a href="/vote/create" >
+                <button style="width: 150px;margin-left: 40px;" class="btn btn-primary btn-lg" >
+                    创建投票
+                </button>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

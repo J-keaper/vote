@@ -56,7 +56,6 @@
     <title>创建投票</title>
 
     <style th:include="/commons/header::#navbar-container-style"></style>
-    <style th:include="/commons/footer::#footer-container-style"></style>
 
     <style>
         #create-vote-steps-bar {
@@ -97,8 +96,10 @@
 </head>
 <body>
 <div th:replace="/commons/header::#navbar-container"></div>
-
-<div class="container">
+<div th:if="${#httpSession.getAttribute('userInfo') == null}">
+    <div th:replace="/components/home/home::#home-container"></div>
+</div>
+<div th:unless="${#httpSession.getAttribute('userInfo') == null}" class="container">
     <div class="panel panel-default">
         <div class="panel-body">
             <h2>创建投票</h2>
