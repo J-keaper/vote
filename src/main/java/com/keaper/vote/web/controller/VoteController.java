@@ -30,7 +30,7 @@ public class VoteController {
     private static final Logger logger = LoggerFactory.getLogger(VoteController.class);
 
     /**
-     * 创建投票页面
+     * 创建投票
      * @return
      */
     @RequestMapping(value = "/create",method = RequestMethod.GET)
@@ -49,8 +49,8 @@ public class VoteController {
     public JsonResult createVote(@RequestBody CreateVoteParam createVoteParam, HttpSession session){
         logger.info("createVoteParam: {}",createVoteParam);
         User user = (User) session.getAttribute("userInfo");
-        voteService.createVote(createVoteParam,user);
-        return JsonResult.getCorrectResult(null);
+        int voteId = voteService.createVote(createVoteParam,user);
+        return JsonResult.getCorrectResult(voteId);
     }
 
     /**
@@ -61,7 +61,7 @@ public class VoteController {
     public String showVote(@PathVariable("voteId") int voteId, Model model){
         Vote vote = voteService.selectVoteInfoById(voteId);
         model.addAttribute("voteInfo",vote);
-        List<VoteOption> voteOptionList= voteService.selectOptiionListById(1);
+        List<VoteOption> voteOptionList= voteService.selectOptiionListById(voteId);
         model.addAttribute("voteOptionList",voteOptionList);
         logger.info("model:{}",model);
         return "/components/vote-show/vote-show";

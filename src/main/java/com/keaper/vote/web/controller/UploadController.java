@@ -1,16 +1,10 @@
 package com.keaper.vote.web.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.baidu.ueditor.define.MIMEType;
 import com.keaper.vote.common.constants.SiteConstants;
 import com.keaper.vote.web.vo.JsonResult;
 import org.apache.commons.io.FileUtils;
-import org.apache.tika.mime.MimeType;
-import org.apache.tika.mime.MimeTypeException;
-import org.apache.tika.mime.MimeTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

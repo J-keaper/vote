@@ -13,6 +13,8 @@ import com.keaper.vote.persistence.po.User;
 import com.keaper.vote.persistence.po.Vote;
 import com.keaper.vote.persistence.po.VoteOption;
 import com.keaper.vote.persistence.po.VoteRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,8 @@ import java.util.List;
 @Service
 public class VoteService {
 
+    private static final Logger logger =LoggerFactory.getLogger(VoteService.class);
+
     @Resource
     private VoteDao voteDao;
 
@@ -34,11 +38,12 @@ public class VoteService {
     private VoteRecordDao voteRecordDao;
 
     @Transactional
-    public boolean createVote(CreateVoteParam createVoteParam,User user ){
+    public int createVote(CreateVoteParam createVoteParam,User user ){
         Vote vote = constructVote(createVoteParam,user);
-        voteDao.insertOneVote(vote);
+        logger.info("CreateVoteParam {} ",vote);
+        int voteId = voteDao.insertOneVote(vote);
         voteOptionDao.insertOptions(constructVoteOptionList(createVoteParam,vote.getId()));
-        return true;
+        return voteId;
     }
 
     public Vote selectVoteInfoById(int id){

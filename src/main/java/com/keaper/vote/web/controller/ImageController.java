@@ -3,6 +3,8 @@ package com.keaper.vote.web.controller;
 
 import com.keaper.vote.common.constants.SiteConstants;
 import com.keaper.vote.common.utils.BufferedImageUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,10 +21,14 @@ import java.io.IOException;
 @RequestMapping("/image")
 public class ImageController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
+
     @ResponseBody
     @RequestMapping("/{name}")
     public ResponseEntity<byte[]> showImage(@PathVariable(value = "name") String imageName) throws IOException {
-        File file = new File(SiteConstants.IMAGE_DIR+imageName);
+        logger.info("name:{}",imageName);
+        File file = new File(SiteConstants.IMAGE_DIR+File.separator+imageName);
+        logger.info(String.valueOf(file));
         BufferedImage bufferedImage = ImageIO.read(file);
         byte [] bytes = BufferedImageUtils.getBytes(bufferedImage);
         return ResponseEntity.ok()
