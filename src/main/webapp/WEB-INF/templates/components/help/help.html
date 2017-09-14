@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <link href="/vote/src/main/webapp/assets/bootstrap-3.3.7/css/bootstrap.min.css"
           th:href="@{/assets/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet">
 
@@ -20,17 +21,23 @@
     <script src="/vote/src/main/webapp/assets/bootstrap-3.3.7/js/bootstrap.min.js"
             th:src="@{/assets/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
 
-
-    <title>首页</title>
-
     <style th:include="/commons/header::#navbar-container-style"></style>
-
 </head>
 <body>
-    <div th:replace="/commons/header::#navbar-container"></div>
-    <div th:replace="/components/home/home::#home-container"></div>
-    <div th:replace="/commons/footer::#footer-container"></div>
-    <script th:replace="/commons/header::#navbar-container-script"></script>
 
+<div th:replace="/commons/header::#navbar-container"></div>
+
+<div class="container">
+    <h4>1.怎样发起投票？</h4>
+    <pre>首先在投票网右上角选择 <span class="text-success">登陆</span> 或 <span class="text-success">注册</span>，登陆成功后即可发起投票。</pre>
+    <h4>2.怎么找回密码？</h4>
+    <pre>登录框上点击 <span class="text-success">忘记密码</span> 链接</pre>
+</div>
+
+<div th:replace="/commons/footer::#footer-container"></div>
+
+
+<script th:replace="/commons/header::#navbar-container-script"></script>
 </body>
+
 </html>

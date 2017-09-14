@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public class BufferedImageUtils {
 
+
     public static byte [] getBytes(BufferedImage bufferedImage) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(bufferedImage, "png", byteArrayOutputStream);

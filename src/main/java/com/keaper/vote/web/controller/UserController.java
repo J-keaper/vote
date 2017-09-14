@@ -180,4 +180,11 @@ public class UserController {
                 null
         );
     }
+
+
+    @RequestMapping(value = "logout",method = RequestMethod.GET)
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "redirect:/";
+    }
 }

@@ -59,6 +59,7 @@ public class VoteController {
      */
     @RequestMapping(value = "/show/{voteId}",method = RequestMethod.GET)
     public String showVote(@PathVariable("voteId") int voteId, Model model){
+        voteService.addOneAccessCount(voteId);
         Vote vote = voteService.selectVoteInfoById(voteId);
         model.addAttribute("voteInfo",vote);
         List<VoteOption> voteOptionList= voteService.selectOptiionListById(voteId);

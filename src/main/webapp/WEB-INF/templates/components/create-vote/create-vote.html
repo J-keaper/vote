@@ -92,6 +92,12 @@
             font-size: 22px;
             margin-left: 20px;
         }
+
+        label.error{
+            color:darkred
+        }
+
+
     </style>
 </head>
 <body>
@@ -621,8 +627,15 @@
 <script th:replace="/commons/header::#navbar-container-script"></script>
 
 <script>
+    var isLogin = [[${#httpSession.getAttribute('userInfo') != null}]];
+
     var step = 1;
     $().ready(function () {
+        console.log(isLogin);
+        if(!isLogin){
+            alert("还未登录，请先登录！");
+            return;
+        }
         $('#create-vote-step1').show();
         $('#create-vote-step2').hide();
         $('#create-vote-step3').hide();

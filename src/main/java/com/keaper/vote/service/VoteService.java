@@ -40,9 +40,10 @@ public class VoteService {
     @Transactional
     public int createVote(CreateVoteParam createVoteParam,User user ){
         Vote vote = constructVote(createVoteParam,user);
-        logger.info("CreateVoteParam {} ",vote);
         int voteId = voteDao.insertOneVote(vote);
-        voteOptionDao.insertOptions(constructVoteOptionList(createVoteParam,vote.getId()));
+        List<VoteOption> voteOptionList = constructVoteOptionList(createVoteParam.getVoteOptionParamList(),vote.getId());
+        logger.info("voteOptionList：{}",voteOptionList);
+        voteOptionDao.insertOptions(voteOptionList);
         return voteId;
     }
 
@@ -58,6 +59,10 @@ public class VoteService {
         List<VoteRecord> voteRecordList = constructVoteRecordList(voteRecordParamList,request);
         int affectRows = voteRecordDao.addVoteRecord(voteRecordList);
         return affectRows > 0;
+    }
+
+    public boolean addOneAccessCount(int voteId){
+        return voteDao.addOneAccessCount(voteId);
     }
 
     private Vote constructVote(CreateVoteParam createVoteParam, User user){
@@ -84,14 +89,14 @@ public class VoteService {
         return vote;
     }
 
-    private List<VoteOption> constructVoteOptionList(CreateVoteParam createVoteParam, int voteId){
+    private List<VoteOption> constructVoteOptionList(List<VoteOptionParam> voteOptionParamList, int voteId){
         List<VoteOption> optionList = new ArrayList<VoteOption>();
-        List<VoteOptionParam> optionParamList = createVoteParam.getVoteOptionParamList();
-        for (VoteOptionParam voteOptionParam : optionParamList){
+        for (VoteOptionParam voteOptionParam : voteOptionParamList){
             VoteOption voteOption = new VoteOption();
             voteOption.setVoteId(voteId);
-            voteOption.setImageUrl(voteOptionParam.getImageUrl());
+            voteOption.setTitle(voteOptionParam.getTitle());
             voteOption.setSummary(voteOptionParam.getSummary());
+            voteOption.setImageUrl(voteOptionParam.getImageUrl());
             voteOption.setExternalLink(voteOptionParam.getExternalLink());
             voteOption.setDetailUrl(voteOptionParam.getDetailUrl());
             voteOption.setRankPosition(voteOptionParam.getRankPosition());

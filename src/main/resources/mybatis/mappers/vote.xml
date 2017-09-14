@@ -106,4 +106,14 @@
       WHERE
           vote.id = #{id}
     </select>
+
+    <update id="addOneAccessCount">
+        UPDATE
+            vote
+        SET
+            vote.access_count = vote.access_count + 1
+        WHERE
+            vote.id = #{id}
+    </update>
+
 </mapper>

@@ -19,5 +19,11 @@ public interface VoteDao {
      */
     Vote selectVoteById(@Param("id") int id);
 
+    /**
+     * 增加访问量
+     * @param id
+     * @return
+     */
+    boolean addOneAccessCount(@Param("id") int id);
 
 }

@@ -38,4 +38,9 @@ public class VoteDaoTest extends BaseSpringTest{
         System.out.println(vote);
     }
 
+    @Test
+    public void addOneAccessCount(){
+        voteDao.addOneAccessCount(1);
+    }
+
 }

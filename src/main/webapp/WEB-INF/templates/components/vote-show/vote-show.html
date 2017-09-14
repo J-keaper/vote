@@ -66,8 +66,23 @@
         </div>
         <div class="vote-time" style="font-size:16px; width: 30%;display: inline;margin-right: 50px">
             <i class="wait icon"></i>
-            <span th:text="${#calendars.format(voteInfo.getStartTime(),'yyyy-MM-dd')}">2017-07-08</span>-
-            <span th:text="${#calendars.format(voteInfo.getEndTime(),'yyyy-MM-dd')}">2017-08-08</span>
+            <span th:if="${voteInfo.getStartTime()} or ${voteInfo.getEndTime()}">
+                <span th:if="${voteInfo.getStartTime()}">
+                    <span th:text="${#calendars.format(voteInfo.getStartTime(),'yyyy-MM-dd')}"></span>
+                </span>
+                <span th:unless="${voteInfo.getStartTime()}">
+                    <span>不限开始时间</span>
+                </span>
+                <span th:if="${voteInfo.getEndTime()}">
+                    <span th:text="${#calendars.format(voteInfo.getEndTime(),'yyyy-MM-dd')}"></span>
+                </span>
+                <span th:unless="${voteInfo.getEndTime()}">
+                    <span>不限结束时间</span>
+                </span>
+            </span>
+            <span th:unless="${voteInfo.getStartTime()} or ${voteInfo.getEndTime()}">
+                <span>不限时间</span>
+            </span>
         </div>
         <div class="vote-access" style="font-size:16px;widows:30%;display: inline">
             <i class="checkmark box icon"></i>
@@ -143,12 +158,11 @@
 </div>
 
 <script type="text/javascript" th:inline="javascript">
-    /*<![DATA[*/
-        var choiceMin =/*[[${voteInfo.getChoiceMin()}]]*/ 0;
-        var choiceMax =/*[[${voteInfo.getChoiceMax()}]]*/ 0;
-        var voteId = /*[[${voteInfo.getId()}]]*/ 0 ;
-    /*]]>*/
+    var choiceMin = [[${voteInfo.getChoiceMin()}]];
+    var choiceMax = [[${voteInfo.getChoiceMax()}]];
+    var voteId = [[${voteInfo.getId()}]];
     var selected = 0;
+
     $().ready(function () {
         $('#submit-alert').hide();
 
