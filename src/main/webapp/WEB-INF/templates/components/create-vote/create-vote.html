@@ -512,37 +512,6 @@
                     </form>
                 </div>
             </div>
-            <!--<div class="panel panel-default" id="create-vote-step4">-->
-                <!--<div class="panel-heading">-->
-                    <!--<h3>第四步：发布与分享</h3>-->
-                <!--</div>-->
-                <!--<div class="panel-body">-->
-                    <!--<form id="create-vote-step4-form">-->
-                        <!--<h4>投票入口</h4>-->
-                        <!--<hr>-->
-                        <!--<table class="table">-->
-                            <!--<tr>-->
-                                <!--<td class="col-sm-4 tb-no-border">-->
-                                    <!--<div class="well" style="display: inline;padding: 10px 5px 5px 5px;">-->
-                                        <!--<label class="control-label" style="font-size:20px;padding:5px">-->
-                                            <!--<a class="bordered" href="http://nhkal3.v.vote8.cn/">http://keaper.v.vote8.cn/</a>-->
-                                        <!--</label>-->
-                                    <!--</div>-->
-                                <!--</td>-->
-                                <!--<td class="tb-no-border">-->
-                                    <!--<button class="btn btn-default">复制链接</button>-->
-                                    <!--<button class="btn btn-default">修改个性网址</button>-->
-                                    <!--<button class="btn btn-default">预览</button>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                        <!--</table>-->
-
-                        <!--<h4>社交媒体分享</h4>-->
-                        <!--<hr>-->
-                        <!--<div class="social-share"></div>-->
-                    <!--</form>-->
-                <!--</div>-->
-            <!--</div>-->
             <div id="step-buttons">
                 <div class="text-right">
                     <button type="button" class="btn btn-default" id="pre-step" disabled>上一步</button>
@@ -814,7 +783,7 @@
                 }),
                 success: function (data) {
                     if(data.code==0){
-                        //跳转
+                        window.location.href = "/manage/share/" + data.data;
                     }
                 }});
             return ;

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!--bootstrap css-->
+    <link href="/vote/src/main/webapp/assets/bootstrap-3.3.7/css/bootstrap.min.css"
+          th:href="@{/assets/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- share.css -->
+    <link href="/vote/src/main/webapp/assets/overtrue-share.js/css/share.min.css"
+          th:href="@{/assets/overtrue-share.js/css/share.min.css}" rel="stylesheet">
+    <!--Semantic-UI CSS-->
+    <link href="/vote/src/main/webapp/assets/Semantic-UI/semantic.min.css"
+          th:href="@{/assets/Semantic-UI/semantic.min.css}" rel="stylesheet">
+    <!--jquery ui css-->
+    <link href="/vote/src/main/webapp/assets/jquery-ui-1.12.1/jquery-ui.min.css"
+          th:href="@{/assets/jquery-ui-1.12.1/jquery-ui.min.css}" rel="stylesheet">
+
+    <!--jquery js-->
+    <script src="/vote/src/main/webapp/assets/jquery-3.2.1/jquery-3.2.1.min.js"
+            th:src="@{/assets/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+    <!--jquery.validate js-->
+    <script src="/vote/src/main/webapp/assets/jquery-validation-1.17.0/jquery.validate.min.js"
+            th:src="@{/assets/jquery-validation-1.17.0/jquery.validate.min.js}"></script>
+    <script src="/vote/src/main/webapp/assets/jquery-validation-1.17.0/localization/messages_zh.min.js"
+            th:src="@{/assets/jquery-validation-1.17.0/localization/messages_zh.min.js}"></script>
+
+    <!--jquery ui js-->
+    <script src="/vote/src/main/webapp/assets/jquery-ui-1.12.1/jquery-ui.min.js"
+            th:src="@{/assets/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
+    <!--bootstrap js-->
+    <script src="/vote/src/main/webapp/assets/bootstrap-3.3.7/js/bootstrap.min.js"
+            th:src="@{/assets/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+    <!--Semantic-UI js-->
+    <script src="/vote/src/main/webapp/assets/Semantic-UI/semantic.min.js"
+            th:src="@{/assets/Semantic-UI/semantic.min.js}"></script>
+
+    <!--ueditor-->
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"
+            th:src="@{/ueditor/ueditor.config.js}"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"
+            th:src="@{/ueditor/ueditor.all.min.js}"></script>
+
+    <!-- share.js -->
+    <script src="/vote/src/main/webapp/assets/overtrue-share.js/js/social-share.min.js"
+            th:src="@{/assets/overtrue-share.js/js/social-share.min.js}"></script>
+    <!--当你使用类名为 `social-share` 或者 `social-share` 时不需要手动初始化-->
+
+    <title>管理中心</title>
+
+    <style th:include="/commons/header::#navbar-container-style"></style>
+    <style th:fragment="/components/manage-center/menu-bar::#manage-center-bar-style" id="manage-center-bar-style">
+        #menu-bar div.item div.menu {
+            margin-left: 5px; !important;
+        }
+    </style>
+</head>
+<body style="margin-top: 50px">
+<!--Header-->
+<div th:replace="/commons/header::#navbar-container"></div>
+
+<div class="container" th:fragment="manage-center-bar" id="manage-center-bar">
+       <div th:replace="/components/manage-center/menu-bar::manage-center-bar"></div>
+</div>
+<!--Footer-->
+<div th:replace="/commons/footer::#footer-container"></div>
+
+<script th:replace="/commons/header::#navbar-container-script"></script>
+
+</body>
+</html>

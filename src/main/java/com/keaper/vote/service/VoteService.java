@@ -40,11 +40,11 @@ public class VoteService {
     @Transactional
     public int createVote(CreateVoteParam createVoteParam,User user ){
         Vote vote = constructVote(createVoteParam,user);
-        int voteId = voteDao.insertOneVote(vote);
+        voteDao.insertOneVote(vote);
         List<VoteOption> voteOptionList = constructVoteOptionList(createVoteParam.getVoteOptionParamList(),vote.getId());
         logger.info("voteOptionList：{}",voteOptionList);
         voteOptionDao.insertOptions(voteOptionList);
-        return voteId;
+        return vote.getId();
     }
 
     public Vote selectVoteInfoById(int id){
